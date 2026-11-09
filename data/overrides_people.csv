@@ -1,0 +1,27 @@
+pid,name,field,wikidata_value,corrected_value,blon,blat,note
+Q104836433,Richard Blank,birthplace_unknown,,,,,Wikidata birthplace is only a state (New York); left off the map
+Q105243678,Manfred Hochstein,birthplace_unknown,,,,,Wikidata birthplace is only a country (Germany); left off the map
+Q11248587,Donal T. Manahan,birthplace_unknown,,,,,Wikidata birthplace is only a country (Ireland); left off the map
+Q11305145,Samuel Whittemore Boggs,birthplace_unknown,,,,,"Wikidata birthplace is only a centre of Kansas, a state; left off the map"
+Q1151928,Archibald McMurdo,birthplace_unknown,,,,,Wikidata birthplace is only a centre of Scotland; left off the map
+Q141714911,Andrew McFarlane,birthplace_unknown,,,,,Wikidata birthplace is only a centre of Scotland; left off the map
+Q32362296,N.I. Buromskiy,birthplace_unknown,,,,,Wikidata birthplace is only a centre of the Soviet Union; left off the map
+Q4226752,Matvey Kozlov,birthplace_unknown,,,,,Wikidata birthplace is only a a region centroid (60N 40E); left off the map
+Q4967281,Caroline Mikkelsen,birthplace_unknown,,,,,Wikidata birthplace is only a country (Denmark); left off the map
+Q5076883,Charles Dinsmoor,birthplace_unknown,,,,,Wikidata birthplace is only a centre of New York State; left off the map
+Q526048,Richard Leach Maddox,birthplace_unknown,,,,,Wikidata birthplace is only a country (England); left off the map
+Q57002963,Gonzalo Hernandez,birthplace_unknown,,,,,Wikidata birthplace is only a country (Costa Rica); left off the map
+Q583553,Alcek,birthplace_unknown,,,,,"Wikidata birthplace is only a uncertain (Bulgar khan, region centroid); left off the map"
+Q616841,Peter Delyan,birthplace_unknown,,,,,Wikidata birthplace is only a country (Hungary); left off the map
+Q6180919,Jeremiah N. Reynolds,birthplace_unknown,,,,,Wikidata birthplace is only a state (Pennsylvania); left off the map
+Q7323700,Richard B. Alley,birthplace_unknown,,,,,"Wikidata birthplace is only a centre of Ohio, a state; left off the map"
+Q7782302,Theophilus Heale,birthplace_unknown,,,,,Wikidata birthplace is only a country (England); left off the map
+Q7794119,Thomas Spert,birthplace_unknown,,,,,Wikidata birthplace is only a country (England); left off the map
+Q92949314,David Beyl,birthplace_unknown,,,,,"Wikidata birthplace is only a centre of Wisconsin, a state; left off the map"
+Q25240299,Rosemary Askin,birthplace_unknown,,,,,Wikidata birthplace is only a country (New Zealand); left off the map
+Q5083297,"Charles Wakefield, 1st Viscount Wakefield",birthplace_unknown,,,,,Wikidata birthplace is only a country (United Kingdom); left off the map
+Q3186575,José Toribio Merino,link,Q2783294,,,,"review: wrong Wikidata P138 link removed: Plata Passage is named after the River Plate estuary, not José Toribio Merino"
+Q130404058,Cedomir Marangunic,link,Q5460736,,,,"review: wrong Wikidata P138 link removed: Florence Nunatak is named after the sealing vessel Florence, not Cedomir Marangunic"
+Q17155054,Óscar Pinochet de la Barra,link,Q2783226,,,,"review: wrong Wikidata P138 link removed: Discovery Sound is named after the ship Discovery, not Oscar Pinochet de la Barra"
+Q5233610,David Ferguson,link,Q2783176,,,,review: wrong Wikidata P138 link removed: Argentino Channel is not named after David Ferguson
+Q3319845,Olaf Holtedahl,link,Q3428275,,,,"review: wrong Wikidata P138 link removed: Kurze Mountains honour Admiral Kurze of the German Admiralty, not Olaf Holtedahl"

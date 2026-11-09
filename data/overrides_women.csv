@@ -1,0 +1,369 @@
+fid,name,verdict,note
+7,Abbott Island,yes,woman: first name Maude
+74,Adelaide Island,yes,woman: Queen
+207,Mount Alexandra,yes,woman: first name Jane
+220,Alice Creek,yes,woman: wife
+221,Mount Alice Gade,yes,woman: first name Alice
+222,Alice Glacier,yes,woman: mother
+266,Alt Glacier,no,"Jean Alt, man"
+404,Ann Island,yes,woman: daughter
+406,Anna Glacier,yes,woman: first name Anna
+409,Cape Anna,yes,woman: Mme
+412,Cape Anne,yes,woman: wife
+413,Mount Anne,yes,woman: first name Anne
+414,Cape Ann,yes,woman: wife
+581,Astrid Ridge,yes,woman: Queen
+603,Mount Atholl,yes,woman: first name Sarah
+623,Audrey Island,yes,woman: daughter
+628,Mount Augusta,yes,woman: Mrs
+791,Mount Baker,yes,woman: first name Gladys
+875,Barbara Island,yes,woman: daughter
+882,Bardell Rock,no,fictional character
+1007,Baudin Peaks,no,her = the ship
+1066,Beaumont Skerries,no,her = the ship
+1221,Bergslienfallet,yes,woman: first name Solveig
+1289,Mount Betty,yes,woman: first name Betty
+1302,Bielecki Island,no,her = the ship
+1441,Blanchard Glacier,no,"Jean Blanchard, man"
+1557,Bon Docteur Nunatak,no,"Jean Cendron, man"
+1664,Bouquet Bay,no,"Jean Bouquet de la Grye, man"
+1717,Boyer Rocks,no,her = the ship
+1866,Mount Bris,no,"Jean le Bris, man"
+1961,Brunvollbotnen,yes,woman: first name Kirsten
+2015,Bugge Islands,yes,woman: niece
+2179,Mount Cadbury,yes,woman: Mrs
+2310,Mount Cara,yes,woman: first name Caroline
+2329,Carlson Buttress,yes,woman: first name Christine
+2345,Mount Caroline Mikkelsen,yes,woman: wife
+2385,Cassandra Nunatak,no,"Cassandra, mythical"
+2441,Mount Cecily,yes,woman: daughter
+2530,Charcot Bay,no,Jean Charcot
+2531,Charcot Canyon,no,Jean Charcot
+2532,Charcot Cove,no,Jean Charcot
+2533,Charcot Fan,no,Jean Charcot
+2537,Cape Charcot,no,Jean Charcot
+2551,Charlotte Bay,yes,woman: fiancee
+2554,Charpentier Pyramid,no,"Jean de Charpentier, man"
+2663,Christine Island,yes,woman: Mrs
+2760,Cleveland Glacier,yes,woman: mother
+2869,Colwell Massif,yes,woman: first name Rita
+3066,Coyer Point,yes,woman: first name Ann
+3121,Creswick Peaks,yes,woman: first name Frances
+3259,Dakers Island,no,her = the ship
+3271,Dallice Peak,yes,woman: she/her
+3326,Darboux Island,no,"Jean Darboux, man"
+3402,Dawson-Lambton Glacier,yes,woman: first name Elizabeth
+3403,Dawson-Lambton Trough,yes,woman: first name Elizabeth
+3529,Dennistoun Glacier,no,her = the ship
+3533,Mount Denucé,no,"Jean Denucé, man"
+3650,Dimick Peaks,yes,woman: first name Dorothy
+3936,"DuFief, Sierra",no,"Jean Du Fief, man"
+3972,Duparc Rocks,no,her = the ship
+4151,Eland Mountains,yes,woman: Lady
+4178,Mount Elizabeth,yes,woman: first name Elizabeth
+4232,Mount Emily,yes,woman: wife
+4236,Emma Island,yes,woman: mother
+4494,Fearn Hill,yes,woman: wife
+4549,Ferrigno Glacier,yes,woman: first name Jane
+4584,Filchner-Ronne-Schelfeis,yes,woman: wife
+4635,Fisher Nunatak,yes,woman: first name Diana
+5264,Gerasimou Glacier,yes,woman: first name Helen
+5281,Gervaize Rocks,no,her = the ship
+5329,Gillies Rock,yes,woman: first name Betty
+5484,Goodenough Glacier,yes,woman: first name Margaret
+5545,Gourdin Island,no,"Jean Gourdin, man"
+5877,Haldorsentoppen,yes,woman: first name Inger
+5948,Mount Hampton,yes,woman: first name Ruth
+6061,Hartshorne Island,no,her = the ship
+6209,Helen Glacier,yes,woman: Lady
+6211,Mount Helen Washington,yes,woman: niece
+6213,Mount Helen,no,"Helen of Troy, mythical"
+6530,Holoviak Glacier,yes,woman: first name Judy
+6564,Honnywill Peak,yes,woman: first name Eleanor
+6652,Houser Peak,yes,woman: first name Elaine
+6671,Howard Island,no,her = the ship
+6850,Mount Ida,yes,woman: first name Ida
+6895,Ingrid Christensen Coast,yes,woman: first name Ingrid
+6896,Cape Ingrid,yes,woman: first name Ingrid
+7089,Jeanne Hill,yes,woman: sister
+7095,Jeffries Bluff,yes,woman: first name Margaret
+7114,Jenny Island,yes,woman: wife
+7125,Jessie Bay,yes,woman: wife
+7236,Mount Josephine,yes,woman: first name Josephine
+7266,June Island,yes,woman: daughter
+7998,Lady Newnes Bay,yes,woman: Lady
+8001,Lafond Bay,no,her = the ship
+8076,Landrum Island,yes,woman: first name Betty
+8118,Lanyon Peak,yes,woman: first name Margaret
+8545,Liv Glacier,yes,woman: daughter
+8650,Lake Lorna,yes,woman: first name Lorna
+8662,Louise Island,yes,woman: sister
+8663,Louise Peak,yes,woman: sister
+8775,Cape Mabel,yes,woman: Mrs
+8813,Mackenzie Peninsula,yes,woman: Mrs
+8863,Mount Mahan,no,"Shirley F. Mahan, radioman 1960: sex not stated, left out"
+8985,Marguerite Bay,yes,woman: wife
+8990,Marie Byrd Canyon,yes,woman: wife
+8991,Marie Byrd Land,yes,woman: wife
+8997,Marina Point,yes,woman: Princess
+9097,Marze Peak,no,"Marion O. Marze, aviation machinist's mate, man"
+9164,Maudbanken,yes,woman: Queen
+9165,Maud Rise,yes,woman: Queen
+9168,Maudheimvidda,yes,woman: Queen
+9169,Maudheim,yes,woman: Queen
+9284,McGuire Island,no,her = the ship
+9285,McHugo Peak,yes,woman: first name Barbara
+9302,Mount McKercher,yes,woman: first name Hazel
+9306,McKinley Peak,yes,woman: first name Grace
+9311,McKnight Creek,yes,woman: first name Diane
+9354,McWhinnie Peak,yes,woman: first name Mary
+9382,Megaw Island,yes,woman: first name Helen
+9396,Melba Peninsula,yes,woman: Dame
+9490,Meusnier Point,no,"Jean Meusnier, man"
+9671,Mitchell Cove,no,her = the ship
+9714,Møgsterbrekka,yes,woman: she/her
+9767,Monsrudnabben,yes,woman: she/her
+9858,Morris Glacier,no,"Cdr Marion E. Morris, man"
+10179,Mount Ness,yes,woman: Mrs
+10587,Mount Oldenburg,yes,woman: first name Margaret
+10719,Osterrieth Range,yes,woman: Mme
+10757,Ouellette Island,no,her = the ship
+10832,Palais Glacier,yes,woman: first name Julie
+11017,Peden Cliffs,yes,woman: first name Irene
+11040,Peltier Channel,no,"Jean Peltier, man"
+11093,Cape Pépin,yes,woman: wife
+11376,Plumstead Valley,yes,woman: she/her
+11622,Princess Anne Glacier,yes,woman: Princess
+11623,Princess Astrid Coast,yes,woman: Princess
+11625,Princess Elizabeth Trough,yes,woman: Queen
+11627,Princess Ragnhild Coast,yes,woman: Princess
+11774,Queen Fabiola Mountains,yes,woman: she/her
+11775,Queen Mary Coast,yes,woman: Queen
+11776,Queen Maud Land,yes,woman: Queen
+11777,Queen Maud Mountains,yes,woman: Queen
+11854,Rameau Inlet,no,"Jean-Philippe Rameau, man"
+11969,Redshaw Point,yes,woman: first name Susan
+12004,Reid Island,yes,woman: daughter
+12205,Robbins Island,no,her = the ship
+12335,Rongé Island,yes,woman: Madame
+12338,Ronne Basin,yes,woman: first name Edith
+12341,Ronne Ice Shelf,yes,woman: first name Edith
+12394,Rostand Island,no,"Jean Rostand, man"
+12404,Rotz Glacier,no,"Jean Rotz, man"
+12538,Mount Ruth Gade,yes,woman: first name Ruth
+12539,Ruth Ridge,yes,woman: sister
+12541,Mount Ruth,yes,woman: first name Ruth
+12607,Saint Martha Cove,no,"Saint Martha, biblical"
+13130,Sheelagh Islands,yes,woman: wife
+13134,Sheila Cove,yes,woman: first name Sheila
+13137,Mount Shelby,yes,woman: first name Marjorie
+13238,Sibelius Glacier,no,"Jean Sibelius, man"
+13248,Siders Bluff,yes,woman: first name Mary
+13280,Silvia Rock,yes,woman: daughter
+13327,Siple Ridge,yes,woman: first name Ruth
+13333,Sirinuten,yes,woman: first name Sigrid
+13632,Solem Ridge,no,"Lt Lynn D. Solem: sex not stated, left out"
+13642,Solomon Glacier,yes,woman: first name Susan
+13667,Sonia Point,yes,woman: Madame
+13917,Stancomb-Wills Glacier Tongue,yes,woman: Dame
+13918,Stancomb-Wills Ice Stream,yes,woman: Miss
+14075,Stopes Point,yes,woman: first name Marie
+14153,Strømmebakken,yes,woman: first name Inger
+14327,Sweeney Mountains,yes,woman: Mrs
+14588,Tharp Ice Rise,yes,woman: first name Marie
+14643,Thomson Summit,yes,woman: first name Janet
+14761,Todd Glacier,yes,woman: first name Gertrude
+14764,Todd Ridge,no,"Marion N. Todd: sex not stated, left out"
+15008,Trundy Island,no,her = the ship
+15039,Tukey Island,no,her = the ship
+15477,Victoria Land,yes,woman: Queen
+15539,Mount Virginia,yes,woman: first name Virginia
+15631,Wade Point,yes,woman: first name Muriel
+15757,Washington Ridge,yes,woman: niece
+15824,Webster Knob,yes,woman: Mrs
+15834,Mount Wedel-Jarlsberg,yes,woman: first name Alice
+15967,Whitcomb Ridge,no,"Jean P. Whitcomb: sex not stated, left out"
+16105,Wilma Glacier,yes,woman: wife
+16266,Mount Wyatt,yes,woman: first name Jane
+16361,Yee Nunataks,yes,woman: first name Virginia
+16607,Peoples Rocks,yes,woman: first name Ann
+16699,Mount Hubbard,yes,woman: first name Paula
+16704,Jones Terrace,yes,woman: first name Lois
+16713,Lawson Creek,yes,woman: first name Wendy
+16730,Mosley-Thompson Cirques,yes,woman: first name Ellen
+16751,Mount Rees,yes,woman: first name Margaret
+16757,Roberts Peak,yes,woman: first name Carol
+16797,Anne Hill,yes,woman: first name Anne
+16869,Margaret Hill,yes,woman: first name Margaret
+16899,Schwall Peak,yes,woman: first name Karen
+16915,Uberuaga Island,yes,woman: first name Julia
+16921,Vogler Peak,yes,woman: first name Jane
+16962,Holtedahl Hill,no,"Olav Holtedahl, man"
+17021,Mount Askin,yes,woman: first name Rosemary
+17039,Cashman Crags,yes,woman: first name Katherine
+17077,Joyce Peak,yes,woman: first name Karen
+17087,Krall Crags,yes,woman: first name Sarah
+17108,Palais Bluff,yes,woman: first name Julie
+17123,Rodgers Point,yes,woman: woman
+17171,Scotland Edge,yes,woman: Baroness
+17288,Bradshaw Peak,yes,woman: first name Margaret
+17296,Lake Chapman,yes,woman: first name Ann
+17323,Lee Glacier,yes,woman: first name Sandra
+17332,McClintock Ridge,yes,woman: first name Barbara
+17344,Rosemary Plateau,yes,woman: wife
+17345,Rubin Peak,yes,woman: first name Vera
+17357,Mount Waterhouse,yes,woman: first name Emma
+17360,Young Peaks,yes,woman: first name Pamela
+17459,Cooke Glacier,yes,woman: first name Kirsten
+17472,Ferrigno Ice Stream,yes,woman: first name Jane
+17473,Finn Spur,yes,woman: first name Carol
+17496,Hulbe Glacier,yes,woman: first name Christina
+17499,Jensen Rampart,yes,woman: first name Kate
+17521,McCafferty Spur,yes,woman: first name Anne
+17541,Pritchard Peak,no,"Col. Marion G. Pritchard Jr, man"
+17548,Rosanova Glacier,yes,woman: first name Christine
+17567,Thomson Glacier,yes,woman: first name Janet
+17572,Vornberger Glacier,yes,woman: first name Patricia
+17741,Gould Spur,yes,woman: first name Patricia
+17754,Wall Valley,yes,woman: first name Diana
+17760,Hawthorne Bluff,yes,woman: first name Ann
+18017,Albert Valley,yes,woman: first name Mary
+18030,Finnemore Peak,yes,woman: first name Michelle
+18061,Welch Crag,yes,woman: first name Kathleen
+18166,Gruev Cove,no,"Dame Gruev, a man (Bulgarian revolutionary)"
+18251,Elfring Peak,yes,woman: first name Christine
+18280,Ramorino Glacier,yes,woman: first name Maria
+18282,Mount Ryan,yes,woman: first name Barbara
+18306,Adélie Coast,yes,woman: wife
+18387,Jatko Peak,yes,woman: first name Joyce
+18394,Raney Peak,yes,woman: woman
+18500,Landau Glacier,yes,woman: first name Denise
+18606,Douglas Scarp,yes,woman: first name Patricia
+18616,Watson Glacier,yes,woman: first name Elizabeth
+18778,Philippa Glacier,yes,woman: Lady
+18983,Fitzpatrick Glacier,yes,woman: first name Joan
+19015,LaFratta Point,yes,woman: first name Susanne
+19325,Stancheva Peak,yes,woman: she/her
+19440,Klenova Peak,yes,woman: first name Maria
+19732,Ushlinova Peak,yes,woman: she/her
+19782,Gurkovska Cove,yes,woman: she/her
+19812,The Devil Rock,no,a dog
+19813,Ginger Reef,no,a dog
+19925,Adie Cove,yes,woman: first name Susan
+20125,Adamson Peak,yes,woman: first name Heather
+20248,Wienecke Ice Tongue,yes,woman: first name Barbara
+20300,Mount Fiennes,yes,woman: first name Virginia
+20303,Pudsey Bay,yes,woman: first name Carol
+20307,Francis Peak,yes,woman: first name Jane
+20311,Morris Glacier,yes,woman: first name Elizabeth
+20318,Fricker Ice Piedmont,yes,woman: first name Helen
+20319,Giles Bay,yes,woman: first name Katherine
+20320,Heywood Glacier,yes,woman: first name Karen
+20376,Rumble Point,yes,woman: first name Jane
+17688,"Oliva, Punta",yes,woman: Doris Oliva Eklund
+120,Agurto Rock,yes,"review: woman, missed by the first pass (read by hand)"
+205,Alexandra Mountains,yes,"review: woman, missed by the first pass (read by hand)"
+206,Cape Alexandra,yes,"review: woman, missed by the first pass (read by hand)"
+362,Cape Anderson,yes,"review: woman, missed by the first pass (read by hand)"
+1214,Bergel Rock,yes,"review: woman, missed by the first pass (read by hand)"
+2113,Mount Bushnell,yes,"review: woman, missed by the first pass (read by hand)"
+3051,Covert Glacier,yes,"review: woman, missed by the first pass (read by hand)"
+5772,Guest Peninsula,yes,"review: woman, missed by the first pass (read by hand)"
+5832,Haban Spur,yes,"review: woman, missed by the first pass (read by hand)"
+6926,Mount Iphigene,yes,"review: woman, missed by the first pass (read by hand)"
+7388,Mount Kathleen,yes,"review: woman, missed by the first pass (read by hand)"
+7773,Kosminskaya Fracture Zone,yes,"review: woman, missed by the first pass (read by hand)"
+8256,Leay Glacier,yes,"review: woman, missed by the first pass (read by hand)"
+8737,Lurabee Glacier,yes,"review: woman, missed by the first pass (read by hand)"
+8845,Magda Nunatak,yes,"review: woman, missed by the first pass (read by hand)"
+9094,Marvin Nunatak,yes,"review: woman, missed by the first pass (read by hand)"
+9623,Minna Bluff,yes,"review: woman, missed by the first pass (read by hand)"
+9780,"Monti, Lago",yes,"review: woman, missed by the first pass (read by hand)"
+10458,Nutt Bluff,yes,"review: woman, missed by the first pass (read by hand)"
+11317,"Pirocchi, Lago",yes,"review: woman, missed by the first pass (read by hand)"
+11624,Princess Elizabeth Land,yes,"review: woman, missed by the first pass (read by hand)"
+11626,Princess Martha Coast,yes,"review: woman, missed by the first pass (read by hand)"
+11772,Queen Alexandra Range,yes,"review: woman, missed by the first pass (read by hand)"
+11773,Queen Elizabeth Range,yes,"review: woman, missed by the first pass (read by hand)"
+12066,Reuning Glacier,yes,"review: woman, missed by the first pass (read by hand)"
+12110,Richardson Glacier,yes,"review: woman, missed by the first pass (read by hand)"
+12115,Richardson Peak,yes,"review: woman, missed by the first pass (read by hand)"
+12357,Rosa Rock,yes,"review: woman, missed by the first pass (read by hand)"
+12387,Mount Rossel,yes,"review: woman, missed by the first pass (read by hand)"
+13249,Mount Sidley,yes,"review: woman, missed by the first pass (read by hand)"
+13266,Signy Island,yes,"review: woman, missed by the first pass (read by hand)"
+16009,Widdowson Glacier,yes,"review: woman, missed by the first pass (read by hand)"
+16048,Wilhelmina Bay,yes,"review: woman, missed by the first pass (read by hand)"
+16113,Wilson Pass,yes,"review: woman, missed by the first pass (read by hand)"
+16671,Dreschhoff Peak,yes,"review: woman, missed by the first pass (read by hand)"
+16681,Hall Bluff,yes,"review: woman, missed by the first pass (read by hand)"
+16682,Hallam Peak,yes,"review: woman, missed by the first pass (read by hand)"
+16724,McDermott Glacier,yes,"review: woman, missed by the first pass (read by hand)"
+16738,Penhale Peak,yes,"review: woman, missed by the first pass (read by hand)"
+16782,Utz Spur,yes,"review: woman, missed by the first pass (read by hand)"
+16785,Vereyken Glacier,yes,"review: woman, missed by the first pass (read by hand)"
+16821,Mount Darby,yes,"review: woman, missed by the first pass (read by hand)"
+16829,Dunbar Head,yes,"review: woman, missed by the first pass (read by hand)"
+16871,Marshall Cirque,yes,"review: woman, missed by the first pass (read by hand)"
+17013,Weigelnunatak,yes,"review: woman, missed by the first pass (read by hand)"
+17068,Grazyna Bluff,yes,"review: woman, missed by the first pass (read by hand)"
+17088,Kristin Peak,yes,"review: woman, missed by the first pass (read by hand)"
+17128,Sheppard Crater,yes,"review: woman, missed by the first pass (read by hand)"
+17346,Rutland Nunatak,yes,"review: woman, missed by the first pass (read by hand)"
+17448,Bellisime Glacier,yes,"review: woman, missed by the first pass (read by hand)"
+17476,Friedmann Peak,yes,"review: woman, missed by the first pass (read by hand)"
+17480,Goodell Glacier,yes,"review: woman, missed by the first pass (read by hand)"
+17482,Grant Valley,yes,"review: woman, missed by the first pass (read by hand)"
+17508,Lindstrom Ridge,yes,"review: woman, missed by the first pass (read by hand)"
+17532,Nereson Glacier,yes,"review: woman, missed by the first pass (read by hand)"
+17554,Score Ridge,yes,"review: woman, missed by the first pass (read by hand)"
+17562,Stapleton Glacier,yes,"review: woman, missed by the first pass (read by hand)"
+17712,"Schiappacasse, Playa",yes,"review: woman, missed by the first pass (read by hand)"
+17750,Redman Pond,yes,"review: woman, missed by the first pass (read by hand)"
+17797,Bratina Valley,yes,"review: woman, missed by the first pass (read by hand)"
+17799,Connell Pond,yes,"review: woman, missed by the first pass (read by hand)"
+17823,Svetlana Passage,yes,"review: woman, missed by the first pass (read by hand)"
+17845,Kirsty Island,yes,"review: woman, missed by the first pass (read by hand)"
+17878,Karavelova Point,yes,"review: woman, missed by the first pass (read by hand)"
+17904,Rayna Knyaginya Peak,yes,"review: woman, missed by the first pass (read by hand)"
+18003,Forsyth Peak,yes,"review: woman, missed by the first pass (read by hand)"
+18004,Gabites Glacier,yes,"review: woman, missed by the first pass (read by hand)"
+18028,Dana Cirque,yes,"review: woman, missed by the first pass (read by hand)"
+18058,Tilav Cirque,yes,"review: woman, missed by the first pass (read by hand)"
+18123,Johnson Mesa,yes,"review: woman, missed by the first pass (read by hand)"
+18188,Nedelya Point,yes,"review: woman, missed by the first pass (read by hand)"
+18220,The Princess Royal Range,yes,"review: woman, missed by the first pass (read by hand)"
+18250,Donnellan Glacier,yes,"review: woman, missed by the first pass (read by hand)"
+18304,Olech Hills,yes,"review: woman, missed by the first pass (read by hand)"
+18310,Queen Mary Land,yes,"review: woman, missed by the first pass (read by hand)"
+18417,Una Peaks,yes,"review: woman, missed by the first pass (read by hand)"
+18434,Castellvi Peak,yes,"review: woman, missed by the first pass (read by hand)"
+18491,Falkner Glacier,yes,"review: woman, missed by the first pass (read by hand)"
+18503,"Hunter, Mount (Palmer Land)",yes,"review: woman, missed by the first pass (read by hand)"
+18600,Kasabova Glacier,yes,"review: woman, missed by the first pass (read by hand)"
+18750,Jacobsen Valley,yes,"review: woman, missed by the first pass (read by hand)"
+18772,Rumyana Glacier,yes,"review: woman, missed by the first pass (read by hand)"
+18775,Sirma Glacier,yes,"review: woman, missed by the first pass (read by hand)"
+18889,Nusha Hill,yes,"review: woman, missed by the first pass (read by hand)"
+19040,Foord Glacier,yes,"review: woman, missed by the first pass (read by hand)"
+19173,Queen Elizabeth Land,yes,"review: woman, missed by the first pass (read by hand)"
+19174,Akaga Glacier,yes,"review: woman, missed by the first pass (read by hand)"
+19183,Desislava Cove,yes,"review: woman, missed by the first pass (read by hand)"
+19219,Mount Sara Teodora,yes,"review: woman, missed by the first pass (read by hand)"
+19311,Meda Nunatak,yes,"review: woman, missed by the first pass (read by hand)"
+19312,Mount Mecheva,yes,"review: woman, missed by the first pass (read by hand)"
+19390,Lapteva Island,yes,"review: woman, missed by the first pass (read by hand)"
+19561,Kenderova Buttress,yes,"review: woman, missed by the first pass (read by hand)"
+19924,Field Cove,yes,"review: woman, missed by the first pass (read by hand)"
+19938,Buneva Point,yes,"review: woman, missed by the first pass (read by hand)"
+19941,Nicolai Peak,yes,"review: woman, missed by the first pass (read by hand)"
+19948,Dimitrova Peak,yes,"review: woman, missed by the first pass (read by hand)"
+19950,Mount Balkanska,yes,"review: woman, missed by the first pass (read by hand)"
+19957,Bagryana Point,yes,"review: woman, missed by the first pass (read by hand)"
+19958,Atanasova Point,yes,"review: woman, missed by the first pass (read by hand)"
+20113,Tolly Nunatak,yes,"review: woman, missed by the first pass (read by hand)"
+20171,Todorova Island,yes,"review: woman, missed by the first pass (read by hand)"
+20172,St. Brigid Island,yes,"review: woman, missed by the first pass (read by hand)"
+20185,Córdova Nunatak,yes,"review: woman, missed by the first pass (read by hand)"
+20417,Crosbie Point,yes,"review: woman, missed by the first pass (read by hand)"
+20447,Murray Stream,yes,"review: woman, missed by the first pass (read by hand)"

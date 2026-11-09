@@ -1,0 +1,61 @@
+fid,name,kind,nation,correct_now,note
+14640,Thomson Peak,person,New Zealand,yes,correct
+1581,Bonney Riegel,association,United States,yes,correct
+17133,Soyuz-17 Cliff,vehicle,United States,yes,correct
+20221,Dugdale Ice Tongue,association,New Zealand,yes,correct
+4782,Cape Folger,person,United States,yes,correct
+9545,Mikhaylov Island,person,Russia,yes,correct
+1032,"Bazhova, nunataki",unknown,Russia,yes,correct
+15878,Wellman Glacier,person,United Kingdom,yes,correct
+10892,Mount Pardoe,person,Australia,yes,correct
+15387,"Pefaur, Península",person,,yes,correct
+7981,Labbé Rock,person,Chile,yes,correct
+9921,Moutonnée Lake,descriptive,United Kingdom,yes,correct
+18038,Kuivinen Ridge,person,United States,yes,should be person; first pass wrong
+7947,Kvelven,descriptive,Norway,yes,correct
+2766,Cline Glacier,person,United States,yes,correct
+8137,Larkman Nunatak,person,New Zealand,yes,correct
+310,Amphitheatre Lake,descriptive,United States,yes,correct
+17935,Ustra Peak,place,Bulgaria,yes,correct
+6424,HL-bandet,unknown,Norway,yes,correct
+19490,Smilets Point,person,Bulgaria,yes,correct
+12396,Rothera Point,person,United Kingdom,yes,correct
+16353,Yanshi Wan,unknown,China,yes,correct
+17591,"Antártico, Playa",unknown,Chile,yes,correct
+2801,Cape Cockburn,person,United Kingdom,yes,correct
+1687,Bowl Island,descriptive,United States,yes,correct
+16899,Schwall Peak,person,New Zealand,yes,correct
+16487,Zhenzhu Qundao,unknown,China,yes,correct
+222,Alice Glacier,person,United Kingdom,yes,correct
+7860,Krout Glacier,person,United States,yes,should be person; first pass wrong
+19091,Heito Ike,other,Japan,fixed by override,should be association; first pass wrong
+6214,Helfert Nunatak,person,United States,yes,correct
+7269,Juno Peaks,other,United Kingdom,fixed by override,should be word; first pass wrong
+11720,"Pustovalova, nunataki",unknown,Russia,yes,correct
+15352,"Vay, roca",unknown,Argentina,yes,correct
+10675,"Origone, pico",unknown,Argentina,yes,correct
+11886,Rasmussen Peninsula,group,United Kingdom,fixed by override,should be association; first pass wrong
+4154,Elder Bluff,person,United States,yes,correct
+645,Auroraholmen,unknown,Norway,fixed by override,should be ship; first pass wrong
+12512,Rush Glacier,other,United Kingdom,,unclear (narrative cut or ambiguous)
+14700,Mount Tidd,person,United States,yes,correct
+12764,Saussure Glacier,person,United Kingdom,yes,should be person; first pass wrong
+3290,Cape Dalton,person,Australia,,unclear (narrative cut or ambiguous)
+9543,Mikazuki Iwa,descriptive,Japan,yes,correct
+8736,Mount Lupa,unknown,United Kingdom,yes,correct
+12569,Cape Ryugu,descriptive,Japan,yes,correct
+16005,Whittle Glacier Tongue,association,United States,yes,correct
+6728,Hughes Range,person,United States,yes,correct
+11442,Pollux Nunatak,association,United Kingdom,yes,correct
+15737,Mount Ware,person,Australia,yes,correct
+14730,Tindal Bluff,person,United Kingdom,yes,correct
+18941,Veregava Ridge,place,Bulgaria,yes,correct
+1434,Blake Nunataks,person,Australia,yes,correct
+2030,Bull Island,person,United States,yes,correct
+19954,Thompson Hill,place,Bulgaria,yes,correct
+19210,Kumanovo Peak,place,Bulgaria,yes,correct
+12797,Scend Rocks,descriptive,United Kingdom,yes,correct
+12218,Roberts Knoll,person,Norway,yes,correct
+5000,Fry Peak,person,United States,yes,correct
+5856,Hagfellekammen,descriptive,Norway,yes,correct
+8019,Lahille Island,person,France,yes,correct
