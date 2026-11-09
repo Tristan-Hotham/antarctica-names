@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Who named Antarctica?</title>
+<meta name="description" content="Who named Antarctica? 20,151 features in the SCAR Composite Gazetteer, mapped by the nation that named them and what they are named after: 57% honour a person.">
+<meta property="og:title" content="Who named Antarctica? Twenty thousand names, twenty five nations">
+<meta property="og:description" content="The United States and Britain named 46% of Antarctica. 57% of names honour a person, and only 3.4% of those are women. Click any name to see who gave it, when and after whom.">
+<meta property="og:image" content="https://maps.tristanhotham.com/antarctica-names/header.png">
+<meta property="og:url" content="https://maps.tristanhotham.com/antarctica-names/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=MedievalSharp&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+/* Parchment and ice: iron-gall ink, vermilion lettering, a pale blue-white continent. */
+:root{
+  --bg:#F6EED8; --panel:#EFE3C4; --fg:#2B2119; --muted:#6E604E; --rule:#E2D3AE; --card:#FBF5E4; --border:#D3C29A;
+  --hot:#A3261B; --cool:#3D6E9E;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --hand:"MedievalSharp","Fraunces",Georgia,serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1A1612; --panel:#241E18; --fg:#EFE6D4; --muted:#ADA08B; --rule:#3A3128; --card:#211B15; --border:#4D4234; --hot:#E07A6C; --cool:#8FB4DA; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1A1612; --panel:#241E18; --fg:#EFE6D4; --muted:#ADA08B; --rule:#3A3128; --card:#211B15; --border:#4D4234; --hot:#E07A6C; --cool:#8FB4DA; color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 18px/1.62 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));overflow-x:hidden}
+.wrap{max-width:720px;margin:0 auto;padding-block:28px 64px}
+.wrap .bleed{width:min(1240px,calc(100vw - 32px));margin-left:calc((100% - min(1240px,100vw - 32px))/2)}
+a{color:inherit;text-decoration-color:var(--hot);text-underline-offset:3px}
+.kicker{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.kicker b{background:#A3261B;color:#fff;padding:5px 8px;font-weight:500}
+header.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 24px;align-items:end;border-bottom:6px double var(--fg);padding-bottom:22px;margin-top:18px}
+h1{font:900 clamp(44px,10vw,92px)/.92 var(--display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+h1 .a{color:var(--hot);font-family:var(--hand);font-weight:400;letter-spacing:.01em}
+.mark{width:clamp(78px,16vw,130px);height:auto;display:block;color:var(--fg)}
+.dek{grid-column:1/-1;font-size:21px;line-height:1.42;margin:8px 0 0;max-width:58ch}
+.byline{font:400 13px/1.4 var(--mono);color:var(--muted);margin-top:14px}
+h2{font:800 34px/1.04 var(--display);letter-spacing:-.01em;margin:54px 0 10px;text-wrap:balance}
+h2 .n{font:500 13px/1 var(--mono);color:var(--hot);display:block;letter-spacing:.1em;margin-bottom:10px}
+p{margin:0 0 16px}
+.lede::first-letter{font:400 76px/.8 var(--hand);float:left;margin:6px 10px 0 0;color:var(--hot)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:26px 0 8px}
+.stats div{background:var(--card);padding:14px 12px}
+.stats b{display:block;font:900 clamp(22px,4.4vw,32px)/1 var(--display);letter-spacing:-.01em;color:var(--hot)}
+.stats span{font:400 12px/1.35 var(--mono);color:var(--muted);display:block;margin-top:6px}
+@media (max-width:600px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.figure{margin:26px 0 30px}
+.fig-h{font:600 19px/1.25 var(--display);margin:0 0 4px}
+.fig-sub{font:400 13px/1.45 var(--mono);color:var(--muted);margin:0 0 12px}
+.src{font:400 12px/1.45 var(--mono);color:var(--muted);margin-top:10px}
+.chart{width:100%;position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{font-family:var(--mono);fill:var(--fg)}
+.lab{font-size:12px}.lab.m{fill:var(--muted)}.lab.b{font-weight:500}.lab.s{font-size:11px}.lab.w{fill:#fff}
+.tip{position:absolute;pointer-events:none;background:var(--fg);color:var(--bg);font:400 12px/1.45 var(--mono);padding:8px 10px;border-radius:3px;max-width:300px;z-index:3000;transform:translate(-50%,calc(-100% - 12px));display:none}
+.controls{display:flex;gap:8px 16px;align-items:center;margin:0 0 10px;flex-wrap:wrap}
+.scrollrow{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;padding-bottom:2px;max-width:100%}
+.scrollrow .btn{flex:0 0 auto;white-space:nowrap}
+.ctl-l{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:2px;flex:0 0 auto;align-self:center}
+.btn{font:500 12px/1 var(--mono);background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:8px 10px;cursor:pointer;min-height:36px}
+.btn[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.btn i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px;border:1px solid rgba(0,0,0,.25)}
+.btn:focus-visible,input:focus-visible,summary:focus-visible,select:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+select.sel{font:500 13px/1 var(--mono);background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:8px;min-height:38px;max-width:100%}
+.srch{position:relative;flex:1 1 240px;max-width:360px}
+.srch input{width:100%;font:400 15px/1 var(--mono);background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:9px 10px;min-height:40px}
+.sug{position:absolute;left:0;right:0;top:100%;margin:2px 0 0;padding:0;list-style:none;background:var(--card);border:1px solid var(--border);max-height:320px;overflow:auto;display:none;box-shadow:0 3px 10px rgba(60,40,10,.2);z-index:1200;font:400 13px/1.35 var(--mono)}
+.sug li{padding:8px 10px;cursor:pointer;border-bottom:1px solid var(--rule)}
+.sug li span{color:var(--muted);font-size:12px}
+.sug li[aria-selected="true"],.sug li:hover{background:var(--panel)}
+.twin{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:12px}
+@media (max-width:900px){.twin{grid-template-columns:1fr}}
+.maptitle{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 6px;display:flex;justify-content:space-between;gap:8px}
+.lmap{height:640px;border:1px solid #BCA676;background:#DCE6EA;border-radius:2px;position:relative;overflow:hidden}
+#wmap{background:#DCE6EA}
+@media (max-width:900px){.lmap{height:min(66vh,540px)}}
+.leaflet-container{font:400 12px/1.4 var(--mono);background:#DCE6EA}
+.leaflet-control-attribution{font:400 11px/1.3 var(--mono)!important;background:rgba(251,245,228,.85)!important;color:#2B2119}
+.leaflet-bar a{background:#FBF5E4;color:#2B2119;border-color:#9C8656}
+.lyrBtn{background:#FBF5E4;color:#2B2119;border:1px solid #9C8656;border-radius:3px;font:600 12px/1 var(--mono);padding:8px 10px;cursor:pointer;box-shadow:0 1px 4px rgba(60,40,10,.18)}
+.lyrBtn[aria-expanded="true"]{background:#2B2119;color:#F6EED8}
+.lyrPanel{background:rgba(251,245,228,.98);color:#2B2119;border:1px solid #9C8656;border-radius:3px;padding:10px 12px 8px;margin-top:6px;width:240px;box-shadow:0 2px 10px rgba(60,40,10,.25);font:400 12px/1.3 var(--mono);max-height:min(56vh,430px);overflow:auto}
+.lyrPanel[hidden]{display:none}
+.lyrPanel h5{margin:8px 0 2px;padding-top:6px;border-top:1px solid #E2D3AE;font:600 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#A3261B}
+.lyrPanel h5:first-child{border-top:0;padding-top:0;margin-top:0}
+.lyrPanel label{display:flex;gap:7px;align-items:center;cursor:pointer;padding:3px 0;min-height:28px}
+.lyrPanel input{accent-color:#A3261B;width:15px;height:15px;flex:none}
+.leaflet-popup-content-wrapper{background:#FBF5E4;color:#2B2119;border:1px solid #9C8656;border-radius:4px;box-shadow:0 3px 12px rgba(60,40,10,.25)}
+.leaflet-popup-content{font:400 12.5px/1.45 var(--mono);margin:10px 12px;max-width:300px;max-height:330px;overflow:auto}
+.leaflet-popup-content b.t{display:block;font:400 19px/1.15 var(--hand);color:#A3261B;margin-bottom:3px}
+.leaflet-popup-content .k{color:#6E604E}
+.leaflet-popup-content a{color:#A3261B}
+.leaflet-popup-tip{background:#FBF5E4}
+.go{cursor:pointer;text-decoration:underline;text-decoration-color:#A3261B;text-underline-offset:3px;color:#A3261B}
+.plab{font:600 11px/1.1 var(--mono);color:#2B2119;text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 2px #fff;white-space:nowrap;letter-spacing:.04em}
+.plab.big{font:400 13px/1.1 var(--hand);color:#3D5A73;letter-spacing:.12em;text-transform:uppercase}
+.plab.claim{font:500 11px/1.1 var(--mono);color:#8B6A3A;letter-spacing:.14em;text-transform:uppercase}
+.legend{display:flex;gap:6px 14px;flex-wrap:wrap;font:400 12px/1.3 var(--mono);color:var(--muted);margin-top:8px;align-items:center}
+.legend span{display:inline-flex;align-items:center}
+.legend i{display:inline-block;width:12px;height:12px;margin-right:6px;border-radius:50%;border:1px solid rgba(43,33,25,.5)}
+.pull{font:600 26px/1.25 var(--display);border-left:6px solid var(--hot);padding:4px 0 4px 18px;margin:30px 0}
+table.tbl{width:100%;border-collapse:collapse;font:400 13px/1.4 var(--mono)}
+table.tbl th{font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:6px 6px 6px 0;border-bottom:2px solid var(--fg);position:sticky;top:0;background:var(--card)}
+table.tbl td{padding:6px 6px 6px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+table.tbl td.r,table.tbl th.r{text-align:right;white-space:nowrap}
+table.tbl tr[data-k]{cursor:pointer}
+table.tbl tr[data-k]:hover td{background:var(--panel)}
+.tablebox{max-height:460px;overflow:auto;border:1px solid var(--border);background:var(--card);padding:0 10px}
+details{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:10px 0;margin:18px 0;font-size:16px}
+summary{font:500 13px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;color:var(--muted)}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.cta a{font:500 13px/1 var(--mono);text-decoration:none;border:1px solid var(--fg);padding:11px 14px;border-radius:3px}
+.cta a.p{background:#A3261B;border-color:#A3261B;color:#fff}
+footer{border-top:6px double var(--fg);margin-top:56px;padding-top:16px;font:400 13px/1.55 var(--mono);color:var(--muted)}
+footer p{margin:0 0 10px}
+.theme{position:fixed;right:12px;bottom:12px;z-index:1002}
+.info{background:var(--card);border:1px solid var(--border);padding:10px 12px;margin-top:10px;font:400 13px/1.5 var(--mono);min-height:52px}
+@media (max-width:600px){h2{font-size:28px}}
+@media print{.theme,.controls{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="kicker"><b>Data study</b><span>Names and places</span><span>Antarctica</span></div>
+<header class="hero">
+  <h1>Who named <span class="a">Antarctica?</span></h1>
+  <svg class="mark" viewBox="0 0 120 120" aria-hidden="true"><g id="heroMark"></g></svg>
+  <p class="dek">Antarctica has never had a native people, yet it has more than twenty thousand place names, almost all given in the last two centuries by two dozen nations at once. I mapped 20,151 of them: who named each one, when, and after whom.</p>
+</header>
+<div class="byline">Dr Tristan Hotham · Independent researcher · 2026 · Data: SCAR Composite Gazetteer of Antarctica (CC BY 4.0), Wikidata (CC0); map: OpenStreetMap via OpenFreeMap, Natural Earth</div>
+
+<div class="stats">
+  <div><b>46%</b><span>of Antarctica's features were named by the United States or the United Kingdom</span></div>
+  <div><b>57%</b><span>of names whose origin is recorded honour a person; 18% describe the place</span></div>
+  <div><b>3.4%</b><span>of the names that honour a person honour a woman</span></div>
+  <div><b>43%</b><span>of dated names were given from 1960 to 1979, the years after the International Geophysical Year</span></div>
+</div>
+
+<p class="lede">Every other continent was named by the people who lived on it, over thousands of years, in languages long since lost. Antarctica was named in a hurry, by strangers, mostly within living memory. Sealers and naval expeditions gave the first names in the 1820s and 1840s; the explorers of the heroic age added more; and then, from the 1940s, aircraft photographed the interior and survey teams found tens of thousands of mountains, glaciers and nunataks that needed something to be called. The names went to the people who were there, to the people who paid, to ships and aircraft, to kings and queens, and sometimes to what a rock looked like.</p>
+<p>The Scientific Committee on Antarctic Research (SCAR) keeps a Composite Gazetteer of Antarctica that brings together the national lists of 25 countries: 39,187 names for 20,151 features once the same feature listed by several countries is counted once. Most entries carry a short narrative that says who named the feature and after what. I read those narratives with a set of rules, checked them by hand where it mattered, and linked the people to Wikidata to find where they were born. The question is simple. Whose continent is it, on the map?</p>
+
+<h2><span class="n">01 · The map</span>Twenty thousand names</h2>
+<p>Each dot is a named feature, coloured by the nation that named it. Pick a nation to see only its names, or colour by what the features are named after. Click any dot for its story; the map on the right shows where the person it honours was born, when Wikidata knows.</p>
+<div class="bleed" id="atlas">
+<div class="controls">
+  <div class="scrollrow" id="natRow"><span class="ctl-l">Named by</span></div>
+</div>
+<div class="controls">
+  <div class="scrollrow" id="colRow"><span class="ctl-l">Colour</span><button class="btn" data-c="nation" aria-pressed="true">Naming nation</button><button class="btn" data-c="kind" aria-pressed="false">Named after</button><button class="btn" data-c="era" aria-pressed="false">When</button></div>
+  <div class="srch"><input type="search" id="q" placeholder="Find a name or a person" aria-label="Find a feature or a person" autocomplete="off"><ul class="sug" id="sug" role="listbox"></ul></div>
+</div>
+<div class="twin">
+  <div><div class="maptitle"><span id="atitle">Antarctica: every named feature</span><span id="acount"></span></div><div id="amap" class="lmap" role="application" aria-label="Polar map of Antarctica with every named feature"></div></div>
+  <div><div class="maptitle"><span>Where the people they honour were born</span><span id="wcount"></span></div><div id="wmap" class="lmap" role="application" aria-label="World map of the birthplaces of people Antarctic features are named after"></div></div>
+</div>
+<div class="info" id="info" aria-live="polite">Click a feature on the polar map, or a birthplace on the world map.</div>
+<div class="legend" id="legend"></div>
+<p class="src">Polar stereographic projection (EPSG:3031), the South Pole at the centre and the Greenwich meridian at the top. Coast and ice shelves from OpenStreetMap via OpenFreeMap; grounded ice from Natural Earth. Claims are the seven national sectors frozen by the Antarctic Treaty; the Antarctic Peninsula is claimed by Argentina, Chile and the United Kingdom at once. Birthplaces from Wikidata, for the 1,998 features whose Wikidata entry names a person.</p>
+</div>
+
+<h2><span class="n">02 · Who named it</span>America and Britain, then everyone else</h2>
+<p>The United States named 5,253 features (26%), most through its Advisory Committee on Antarctic Names, which since 1947 has named the features found by American aircraft, ships and field parties. The United Kingdom named 3,981 (20%), above all through its Antarctic Place-names Committee and the surveys of the Falkland Islands Dependencies Survey and the British Antarctic Survey on the Antarctic Peninsula. Then come Norway (1,590), Bulgaria (1,534), Australia (1,442), New Zealand (1,368) and Russia (1,292).</p>
+<div class="figure"><p class="fig-h">Features named by each nation</p><p class="fig-sub">The nation that first named each feature, read from the gazetteer narratives (or the only national list that holds it). Hover a bar.</p><div class="chart" id="natChart"></div></div>
+<p>A name in a country's gazetteer is not always that country's name. The SCAR gazetteer holds 39,187 entries because most features are listed by several countries: 59% appear in more than one national list. The Russian list, for example, holds 4,808 entries, most of them transliterations of names given by others. I count each feature once, for the nation that named it first. For 10,831 features the narrative says who named it; for 6,397 only one national list holds the feature; for 1,559 I take the expedition the narrative says discovered or charted it; for 956 the list that approved it first, the weakest of these rules; 401 remain unknown. I read the attribution of every land, coast, sea and ice shelf by eye and corrected 7.</p>
+
+<h2><span class="n">03 · Claims</span>Naming as a claim</h2>
+<p>Seven countries claim slices of Antarctica, frozen but not given up under the Antarctic Treaty of 1959. Naming a place has always been a way of saying it is yours, and the claimants mostly name inside their own claims: 99.5% of Argentina's names, 96% of Australia's and 80% of Norway's lie in their own sectors. But they do not name most of what they claim. Australia named 38% of the features in the Australian Antarctic Territory and Norway 56% of Dronning Maud Land. The United States, which claims nothing, named 48% of the features in New Zealand's Ross Dependency and 96% of unclaimed Marie Byrd Land. On the Antarctic Peninsula, claimed three times over, Britain named 41% of the features inside the Argentine claim, and Argentina only 5.5%.</p>
+<div class="figure"><p class="fig-h">Who named the features inside each claim</p><p class="fig-sub">Features inside each national sector by the nation that named them. The three Peninsula claims overlap. Undersea features (254) are left out, and the 59 features of Peter I Island count with Norway's claim. Hover a block.</p><div class="chart" id="claimChart"></div></div>
+
+<h2><span class="n">04 · When</span>The great naming of the 1960s</h2>
+<p>Only 148 of the dated names carry a date from the heroic age of exploration (1897 to 1922), the era of Amundsen, Scott, Shackleton and Mawson, though many more were given then and are dated here by a later approval. The flood came later. After the Second World War, aerial photography from American, British, Norwegian and Australian expeditions revealed whole mountain ranges, and the International Geophysical Year of 1957 to 1958 put permanent stations on the continent. Between 1960 and 1979 7,472 features were named, 43% of all dated names; the busiest decade was the 1960s with 5,384. Naming has not stopped: 18% of dated names were given in 2000 or later, 48% of them by Bulgaria.</p>
+<div class="figure"><p class="fig-h">Names given in each decade</p><p class="fig-sub">Features by decade of naming, stacked by the naming nation. The year is the one in the naming statement where the narrative gives it, otherwise the first approval by a national committee. Hover a column.</p><div class="chart" id="decChart"></div></div>
+
+<h2><span class="n">05 · After what</span>People, ships, shapes and Bulgarian towns</h2>
+<p>For 16,354 features (81%) the narrative says what the name means. Of those, 57% honour a person, 18% describe the place (its shape, colour or something that happened there), 6% are named after a place elsewhere, 5% take the name of a nearby feature and 3% honour a ship. Nations name very differently. 83% of American names whose origin is recorded honour a person, and 53% of British ones. Norway and Japan describe: 61% of Norwegian names and 86% of Japanese ones are descriptive, like the Norwegian Skakktoppen (the crooked peak) or the Japanese Mikazuki Iwa (crescent rock). Bulgaria, which began naming in earnest in the 2000s, names after home: 57% of its names are towns, villages, rivers and mountains in Bulgaria.</p>
+<div class="figure"><p class="fig-h">What the features are named after, by nation</p><p class="fig-sub">Features whose narrative says what the name means, by naming nation. Read by rules from the narrative text and checked on samples; see the method. Hover a block.</p><div class="chart" id="kindChart"></div><div class="legend" id="kindLegend"></div></div>
+
+<h2><span class="n">06 · Who is honoured</span>Cooks, pilots and patrons</h2>
+<p>The people on Antarctica's map are not mostly famous. The commonest surnames among the features named after a person are Smith (35), Davis (23), Brown (22), Johnson (21) and Wilson (19), because the American and British committees honoured the people who did the work: the scientists, the surveyors, the aircrew and the station staff. Reading what the narratives say about each person, 33% were scientists or surveyors and 18% naval or military personnel. 30% of the people on American names served in the US Navy or another service, mostly in the air squadrons of Operation Deep Freeze; 25% of the people on Australian names were station staff such as cooks, radio officers and weather observers. Bulgaria honours its own history: 18% of its people are tsars, khans and politicians, and 13% writers, artists and composers.</p>
+<div class="figure"><p class="fig-h">What the honoured people did</p><p class="fig-sub">Features named after a person, by what the narrative says about them (the first group that matches, in the order of the legend), for the main naming nations. Hover a block.</p><div class="chart" id="roleChart"></div><div class="legend" id="roleLegend"></div></div>
+
+<h2><span class="n">07 · Where they were born</span>A European continent</h2>
+<p>Wikidata links 1,998 Antarctic features to 1,772 people, 1,449 of them with a known birthplace. 74% were born in Europe and 17% in North America; Oceania has 66, Asia 33, South America 18 and Africa 7. By modern country the United Kingdom leads (307), then the United States (239), France (166) and Norway (132). Some nations look abroad more than others: of the people on British names with a known birthplace, 40% were born in the United Kingdom, against 81% of the people on Norwegian names born in Norway. The most honoured in Wikidata are Roald Amundsen (8 features), Ernest Shackleton and Douglas Mawson (7 each).</p>
+<div class="figure"><p class="fig-h">Where the people were born</p><p class="fig-sub">People that Antarctic features are named after in Wikidata, with a located birthplace, by modern continent. Hover a block.</p><div class="chart" id="contChart"></div></div>
+
+<h2><span class="n">08 · Women</span>Wives, daughters and queens</h2>
+<p>Of the 9,353 features named after a person, 315 honour a woman (3.4%). They include some of the biggest names on the map: Queen Maud Land, Victoria Land, Marie Byrd Land and the Ronne Ice Shelf. But until recently the women on the map were there because of whom they were related to. Of the women honoured in names given before 1990, 64% were queens, princesses, wives, daughters, mothers or sisters of explorers and patrons. Since 1990 the share of women among people honoured has risen to 10.3%, against 1.9% before, and most of them are scientists and support staff honoured for their own work, from the glaciologist Julie Palais to the geologist Margaret Bradshaw: only 6% are relatives or royals.</p>
+<div class="figure"><p class="fig-h">Women among the people honoured</p><p class="fig-sub">Share of features named after a person that honour a woman, by period of naming. Every candidate was read by hand. Hover a bar.</p><div class="chart" id="womenChart"></div></div>
+<p class="pull">Before 1990, nearly two in three of the women on Antarctica's map were there as someone's wife, daughter or queen.</p>
+
+<h2><span class="n">09 · One place, many names</span>When nations disagree</h2>
+<p>Most features in several national lists share one name, translated or transliterated: the Bellingshausen Sea is the Mar de Bellingshausen in Spanish and Bellingshausenhavet in Norwegian. But 1,038 features (8.7% of those listed more than once) carry names that differ by more than spelling or transliteration in different lists. Some are translations (the Seal Nunataks are the Robbeninseln in German and the nunataks Foca in Argentina's list); many are genuinely different names, mostly on the Antarctic Peninsula, where Argentina and Chile kept their own names for features Britain had named. Turn on the claims layer and click one: the popup lists every name.</p>
+<div class="figure"><p class="fig-h">Features with the most different names</p><p class="fig-sub">Every name in every national gazetteer. Click a row to find it on the map.</p><div class="tablebox"><table class="tbl" id="diffTable"></table></div></div>
+
+<h2><span class="n">10 · How I did this</span>Methods and caveats</h2>
+<p><b>Data.</b> The SCAR Composite Gazetteer of Antarctica, as served by the Australian Antarctic Data Centre: 39,187 names in 25 national gazetteers, plus undersea features named through the GEBCO undersea names committee. Names of the same feature share a common identifier; I count 20,151 features after merging 8 pairs of identifiers that hold the same name at the same place. People and birthplaces come from Wikidata (CC0): features with coordinates in Antarctica and a "named after" statement, matched to the gazetteer by name within 25 km (86% of Wikidata's Antarctic features matched).</p>
+<p><b>Reading the narratives.</b> The naming nation, the naming year and what each feature is named after are read from the narratives by rules (published with the code): the phrase "named by" gives the committee, expedition or leader, mapped to a nation; the words after "named for", "named after" or "in honour of" give the honoree, sorted into a person, a ship, a place elsewhere, a description and so on. A first random audit of 100 features found about one in ten misread; after improving the rules a second audit of 60 found 7 faults, which are fixed. An independent review then read the doubtful classes again and corrected 196 more readings (mostly people filed as "other"), found 106 women the first pass had missed and removed 5 wrong Wikidata links; some people remain in "other", so the share of people is if anything an underestimate. Every possible woman (from titles, relatives, given names, Slavic surnames and Wikidata's sex) was read by hand: 368 candidates, 315 confirmed. Features named after a couple or a family are not counted as honouring a woman. 21 Wikidata birthplaces that are only a country or state are left off the map. Countries of birth are modern (Natural Earth). In the source, 226 British approval dates of 2001 to 2010 are stored a century early (1901 to 1910); I corrected them.</p>
+<p><b>Caveats.</b> The narratives vary by country: the American, British, Australian and New Zealand ones are full, while many Russian, Argentine and Chinese entries have no narrative in English or none at all, so 19% of features have no recorded meaning. The naming year is often the year a committee approved a name rather than the year it was first used, which pulls older names into the 1940s to 1960s. Claims are drawn as longitude sectors; undersea features (254, SCAR's sea-floor class) are counted as features but left out of every claim share. Wikidata covers only some of the people. Some readings will still be wrong; the data file lists the rule-based reading and the text it came from for every feature, so that anyone can check.</p>
+<details><summary>Sources and licences</summary>
+<ul>
+<li>Secretariat SCAR (1992, updated 2014) Composite Gazetteer of Antarctica, Scientific Committee on Antarctic Research (the citation form the Australian Antarctic Data Centre recommends); served by the Australian Antarctic Data Centre, CC BY 4.0. Each entry credits its national gazetteer and naming authority.</li>
+<li>Wikidata contributors, Wikidata (CC0), queried with QLever (University of Freiburg). Vrandečić, D. and Krötzsch, M. (2014) Wikidata: a free collaborative knowledgebase. Communications of the ACM 57(10), 78 to 85.</li>
+<li>Coast and ice shelves: OpenStreetMap contributors (ODbL), vector tiles from OpenFreeMap. Grounded ice, countries and towns: Natural Earth (public domain).</li>
+<li>Claims: the national sectors as frozen by Article IV of the Antarctic Treaty (1959).</li>
+</ul></details>
+
+<div class="cta"><a class="p" href="https://doi.org/10.5281/zenodo.24075309">Read the paper</a><a href="https://github.com/Tristan-Hotham/antarctica-names">Data and code</a><a href="https://blog.tristanhotham.com/2026/10/31/antarctica-names/">Blog post</a></div>
+
+<footer>
+<p>Dr Tristan Hotham, Independent researcher. ORCID <a href="https://orcid.org/0000-0003-4931-9349">0000-0003-4931-9349</a>.</p>
+<p>Cite as: Hotham, T. (2026) Who named Antarctica? The nations, years and people behind twenty thousand Antarctic place names. Zenodo. <a href="https://doi.org/10.5281/zenodo.24075309">10.5281/zenodo.24075309</a></p>
+<p>Data: SCAR Composite Gazetteer of Antarctica (CC BY 4.0); Wikidata (CC0). Text, figures and derived data CC BY 4.0; code MIT. Map data © OpenStreetMap contributors (ODbL); Natural Earth.</p>
+<p>I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.</p>
+</footer>
+</div>
+<div class="tip" id="tip"></div>
+<button class="btn theme" id="theme" aria-label="Toggle dark mode">◐</button>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const R = {"meta":{"page":"https://maps.tristanhotham.com/antarctica-names/","repo":"https://github.com/Tristan-Hotham/antarctica-names","scar":"Secretariat SCAR (1992, updated 2014) Composite Gazetteer of Antarctica, Scientific Committee on Antarctic Research (the citation form the Australian Antarctic Data Centre recommends); served by the Australian Antarctic Data Centre, CC BY 4.0"},"source":{"rows":39187,"features":20151,"gazetteers":25,"multi":11945,"multi_pct":59.28,"single":8206,"different":1038,"different_pct_multi":8.69,"merged":8,"undersea":254,"undersea_scufn":38,"wd_features":19693,"wd_linked":17028,"wd_linked_pct":86.47,"people":1772,"people_located":1450,"features_with_person_wd":1998,"nation_known":19750,"nation_known_pct":98.01,"nation_src":{"narrative":10831,"only gazetteer":6397,"discoverer":1559,"earliest approval":956,"override":7},"stated":16354,"stated_pct":81.16,"year_known":17194,"year_narr":4389},"gaz":[{"gaz":"United States","n":13192,"only":1918},{"gaz":"United Kingdom","n":5181,"only":457},{"gaz":"Russia","n":4808,"only":963},{"gaz":"New Zealand","n":3577,"only":243},{"gaz":"Australia","n":2587,"only":484},{"gaz":"Argentina","n":2560,"only":393},{"gaz":"Chile","n":1866,"only":281},{"gaz":"Norway","n":1706,"only":579},{"gaz":"Bulgaria","n":1540,"only":1470},{"gaz":"Germany","n":399,"only":275},{"gaz":"Poland","n":365,"only":292},{"gaz":"China","n":364,"only":319},{"gaz":"Japan","n":345,"only":181},{"gaz":"France","n":227,"only":127},{"gaz":"Undersea (SCUFN)","n":182,"only":80},{"gaz":"Belgium","n":117,"only":4},{"gaz":"Italy","n":54,"only":49},{"gaz":"Spain","n":35,"only":19},{"gaz":"South Korea","n":27,"only":27},{"gaz":"India","n":21,"only":19},{"gaz":"Austria","n":15,"only":15},{"gaz":"Ecuador","n":9,"only":4},{"gaz":"Uruguay","n":5,"only":4},{"gaz":"South Africa","n":2,"only":2},{"gaz":"Canada","n":2,"only":1},{"gaz":"Ukraine","n":1,"only":0}],"kind":{"person":{"n":9353,"pct":46.41,"pct_stated":57.19,"name":"A person"},"group":{"n":30,"pct":0.15,"pct_stated":0.18,"name":"People as a group"},"ship":{"n":418,"pct":2.07,"pct_stated":2.56,"name":"A ship"},"vehicle":{"n":41,"pct":0.2,"pct_stated":0.25,"name":"An aircraft, vehicle or spacecraft"},"institution":{"n":155,"pct":0.77,"pct_stated":0.95,"name":"An institution, expedition or operation"},"place":{"n":1032,"pct":5.12,"pct_stated":6.31,"name":"A place elsewhere"},"event":{"n":21,"pct":0.1,"pct_stated":0.13,"name":"An event or date"},"myth":{"n":127,"pct":0.63,"pct_stated":0.78,"name":"Myth and fiction"},"word":{"n":98,"pct":0.49,"pct_stated":0.6,"name":"Stars, letters, words and works"},"nature":{"n":85,"pct":0.42,"pct_stated":0.52,"name":"Wildlife and plants"},"descriptive":{"n":2981,"pct":14.79,"pct_stated":18.23,"name":"Its shape, colour or story (descriptive)"},"association":{"n":760,"pct":3.77,"pct_stated":4.65,"name":"A nearby feature (association)"},"other":{"n":1253,"pct":6.22,"pct_stated":7.66,"name":"Other or unclear"},"unknown":{"n":3797,"pct":18.84,"pct_stated":null,"name":"Not stated"},"people_all":{"n":9383,"pct_stated":57.37},"vessels":{"n":459,"pct_stated":2.81}},"peter_i":59,"nations":[{"nation":"United States","n":5253,"pct":26.07,"stated":4982,"person_pct":82.82,"place_pct":0.32,"descriptive_pct":7.01,"ship_pct":1.47,"association_pct":3.57,"myth_pct":0.2,"nature_pct":0.06,"institution_pct":0.94,"word_pct":0.06,"other_pct":3.11,"year_median":1967,"women":121},{"nation":"United Kingdom","n":3981,"pct":19.76,"stated":3666,"person_pct":52.59,"place_pct":0.87,"descriptive_pct":21.88,"ship_pct":3.87,"association_pct":8.29,"myth_pct":1.17,"nature_pct":0.79,"institution_pct":0.95,"word_pct":1.28,"other_pct":7.56,"year_median":1960,"women":74,"own_claim_pct":83.57},{"nation":"Norway","n":1590,"pct":7.89,"stated":1271,"person_pct":26.91,"place_pct":1.42,"descriptive_pct":60.9,"ship_pct":2.36,"association_pct":2.44,"myth_pct":0.08,"nature_pct":0.08,"institution_pct":0.39,"word_pct":0.16,"other_pct":4.72,"year_median":1966,"women":22,"own_claim_pct":79.67},{"nation":"Bulgaria","n":1534,"pct":7.61,"stated":1496,"person_pct":25.94,"place_pct":56.95,"descriptive_pct":3.01,"ship_pct":2.34,"association_pct":1.07,"myth_pct":2.41,"nature_pct":0.07,"institution_pct":0.2,"word_pct":0.13,"other_pct":7.69,"year_median":2011,"women":29},{"nation":"Australia","n":1442,"pct":7.16,"stated":1281,"person_pct":69.63,"place_pct":1.33,"descriptive_pct":10.85,"ship_pct":1.48,"association_pct":1.72,"myth_pct":0.7,"nature_pct":2.58,"institution_pct":0.62,"word_pct":1.48,"other_pct":8.9,"year_median":1965,"women":12,"own_claim_pct":95.77},{"nation":"New Zealand","n":1368,"pct":6.79,"stated":1173,"person_pct":36.49,"place_pct":1.45,"descriptive_pct":28.05,"ship_pct":2.13,"association_pct":10.83,"myth_pct":1.45,"nature_pct":0.6,"institution_pct":1.28,"word_pct":0.94,"other_pct":15.94,"year_median":1965,"women":15,"own_claim_pct":84.3},{"nation":"Russia","n":1292,"pct":6.41,"stated":250,"person_pct":56.4,"place_pct":4.4,"descriptive_pct":24.0,"ship_pct":4.8,"association_pct":0.4,"myth_pct":0.4,"nature_pct":0.0,"institution_pct":1.6,"word_pct":0.0,"other_pct":7.6,"year_median":1970,"women":0},{"nation":"France","n":514,"pct":2.55,"stated":408,"person_pct":62.99,"place_pct":2.21,"descriptive_pct":14.95,"ship_pct":4.17,"association_pct":1.72,"myth_pct":0.49,"nature_pct":0.49,"institution_pct":3.43,"word_pct":0.74,"other_pct":8.58,"year_median":1952,"women":9,"own_claim_pct":39.69},{"nation":"Germany","n":463,"pct":2.3,"stated":455,"person_pct":44.4,"place_pct":6.81,"descriptive_pct":14.73,"ship_pct":1.32,"association_pct":1.1,"myth_pct":0.22,"nature_pct":0.0,"institution_pct":0.66,"word_pct":1.1,"other_pct":29.01,"year_median":1985,"women":2},{"nation":"Argentina","n":441,"pct":2.19,"stated":49,"person_pct":26.53,"place_pct":4.08,"descriptive_pct":10.2,"ship_pct":16.33,"association_pct":10.2,"myth_pct":0.0,"nature_pct":0.0,"institution_pct":4.08,"word_pct":0.0,"other_pct":28.57,"year_median":1978,"women":0,"own_claim_pct":99.55},{"nation":"Chile","n":397,"pct":1.97,"stated":159,"person_pct":63.52,"place_pct":0.63,"descriptive_pct":10.06,"ship_pct":11.32,"association_pct":1.26,"myth_pct":0.0,"nature_pct":0.0,"institution_pct":0.63,"word_pct":0.0,"other_pct":12.58,"year_median":1971,"women":4,"own_claim_pct":100.0},{"nation":"Poland","n":350,"pct":1.74,"stated":196,"person_pct":64.8,"place_pct":6.12,"descriptive_pct":1.53,"ship_pct":1.53,"association_pct":1.02,"myth_pct":1.02,"nature_pct":1.53,"institution_pct":2.04,"word_pct":1.53,"other_pct":16.33,"year_median":1981,"women":3},{"nation":"Japan","n":345,"pct":1.71,"stated":306,"person_pct":2.94,"place_pct":0.0,"descriptive_pct":85.95,"ship_pct":0.65,"association_pct":5.23,"myth_pct":0.0,"nature_pct":0.98,"institution_pct":0.0,"word_pct":0.0,"other_pct":4.25,"year_median":1975,"women":0},{"nation":"China","n":322,"pct":1.6,"stated":24,"person_pct":4.17,"place_pct":4.17,"descriptive_pct":20.83,"ship_pct":0.0,"association_pct":8.33,"myth_pct":4.17,"nature_pct":0.0,"institution_pct":8.33,"word_pct":4.17,"other_pct":41.67,"year_median":1992,"women":0},{"nation":"Belgium","n":160,"pct":0.79,"stated":150,"person_pct":71.33,"place_pct":3.33,"descriptive_pct":5.33,"ship_pct":2.0,"association_pct":4.0,"myth_pct":0.0,"nature_pct":0.0,"institution_pct":3.33,"word_pct":0.0,"other_pct":10.67,"year_median":1955,"women":9},{"nation":"Sweden","n":84,"pct":0.42,"stated":80,"person_pct":57.5,"place_pct":0.0,"descriptive_pct":25.0,"ship_pct":3.75,"association_pct":5.0,"myth_pct":0.0,"nature_pct":2.5,"institution_pct":0.0,"word_pct":0.0,"other_pct":6.25,"year_median":1952,"women":0}],"nation_n":{"United States":{"nation":"United States","n":5253,"pct":26.07,"stated":4982,"person_pct":82.82,"place_pct":0.32,"descriptive_pct":7.01,"ship_pct":1.47,"association_pct":3.57,"myth_pct":0.2,"nature_pct":0.06,"institution_pct":0.94,"word_pct":0.06,"other_pct":3.11,"year_median":1967,"women":121},"United Kingdom":{"nation":"United Kingdom","n":3981,"pct":19.76,"stated":3666,"person_pct":52.59,"place_pct":0.87,"descriptive_pct":21.88,"ship_pct":3.87,"association_pct":8.29,"myth_pct":1.17,"nature_pct":0.79,"institution_pct":0.95,"word_pct":1.28,"other_pct":7.56,"year_median":1960,"women":74,"own_claim_pct":83.57},"Norway":{"nation":"Norway","n":1590,"pct":7.89,"stated":1271,"person_pct":26.91,"place_pct":1.42,"descriptive_pct":60.9,"ship_pct":2.36,"association_pct":2.44,"myth_pct":0.08,"nature_pct":0.08,"institution_pct":0.39,"word_pct":0.16,"other_pct":4.72,"year_median":1966,"women":22,"own_claim_pct":79.67},"Bulgaria":{"nation":"Bulgaria","n":1534,"pct":7.61,"stated":1496,"person_pct":25.94,"place_pct":56.95,"descriptive_pct":3.01,"ship_pct":2.34,"association_pct":1.07,"myth_pct":2.41,"nature_pct":0.07,"institution_pct":0.2,"word_pct":0.13,"other_pct":7.69,"year_median":2011,"women":29},"Australia":{"nation":"Australia","n":1442,"pct":7.16,"stated":1281,"person_pct":69.63,"place_pct":1.33,"descriptive_pct":10.85,"ship_pct":1.48,"association_pct":1.72,"myth_pct":0.7,"nature_pct":2.58,"institution_pct":0.62,"word_pct":1.48,"other_pct":8.9,"year_median":1965,"women":12,"own_claim_pct":95.77},"New Zealand":{"nation":"New Zealand","n":1368,"pct":6.79,"stated":1173,"person_pct":36.49,"place_pct":1.45,"descriptive_pct":28.05,"ship_pct":2.13,"association_pct":10.83,"myth_pct":1.45,"nature_pct":0.6,"institution_pct":1.28,"word_pct":0.94,"other_pct":15.94,"year_median":1965,"women":15,"own_claim_pct":84.3},"Russia":{"nation":"Russia","n":1292,"pct":6.41,"stated":250,"person_pct":56.4,"place_pct":4.4,"descriptive_pct":24.0,"ship_pct":4.8,"association_pct":0.4,"myth_pct":0.4,"nature_pct":0.0,"institution_pct":1.6,"word_pct":0.0,"other_pct":7.6,"year_median":1970,"women":0},"France":{"nation":"France","n":514,"pct":2.55,"stated":408,"person_pct":62.99,"place_pct":2.21,"descriptive_pct":14.95,"ship_pct":4.17,"association_pct":1.72,"myth_pct":0.49,"nature_pct":0.49,"institution_pct":3.43,"word_pct":0.74,"other_pct":8.58,"year_median":1952,"women":9,"own_claim_pct":39.69},"Germany":{"nation":"Germany","n":463,"pct":2.3,"stated":455,"person_pct":44.4,"place_pct":6.81,"descriptive_pct":14.73,"ship_pct":1.32,"association_pct":1.1,"myth_pct":0.22,"nature_pct":0.0,"institution_pct":0.66,"word_pct":1.1,"other_pct":29.01,"year_median":1985,"women":2},"Argentina":{"nation":"Argentina","n":441,"pct":2.19,"stated":49,"person_pct":26.53,"place_pct":4.08,"descriptive_pct":10.2,"ship_pct":16.33,"association_pct":10.2,"myth_pct":0.0,"nature_pct":0.0,"institution_pct":4.08,"word_pct":0.0,"other_pct":28.57,"year_median":1978,"women":0,"own_claim_pct":99.55},"Chile":{"nation":"Chile","n":397,"pct":1.97,"stated":159,"person_pct":63.52,"place_pct":0.63,"descriptive_pct":10.06,"ship_pct":11.32,"association_pct":1.26,"myth_pct":0.0,"nature_pct":0.0,"institution_pct":0.63,"word_pct":0.0,"other_pct":12.58,"year_median":1971,"women":4,"own_claim_pct":100.0},"Poland":{"nation":"Poland","n":350,"pct":1.74,"stated":196,"person_pct":64.8,"place_pct":6.12,"descriptive_pct":1.53,"ship_pct":1.53,"association_pct":1.02,"myth_pct":1.02,"nature_pct":1.53,"institution_pct":2.04,"word_pct":1.53,"other_pct":16.33,"year_median":1981,"women":3},"Japan":{"nation":"Japan","n":345,"pct":1.71,"stated":306,"person_pct":2.94,"place_pct":0.0,"descriptive_pct":85.95,"ship_pct":0.65,"association_pct":5.23,"myth_pct":0.0,"nature_pct":0.98,"institution_pct":0.0,"word_pct":0.0,"other_pct":4.25,"year_median":1975,"women":0},"China":{"nation":"China","n":322,"pct":1.6,"stated":24,"person_pct":4.17,"place_pct":4.17,"descriptive_pct":20.83,"ship_pct":0.0,"association_pct":8.33,"myth_pct":4.17,"nature_pct":0.0,"institution_pct":8.33,"word_pct":4.17,"other_pct":41.67,"year_median":1992,"women":0},"Belgium":{"nation":"Belgium","n":160,"pct":0.79,"stated":150,"person_pct":71.33,"place_pct":3.33,"descriptive_pct":5.33,"ship_pct":2.0,"association_pct":4.0,"myth_pct":0.0,"nature_pct":0.0,"institution_pct":3.33,"word_pct":0.0,"other_pct":10.67,"year_median":1955,"women":9},"Sweden":{"nation":"Sweden","n":84,"pct":0.42,"stated":80,"person_pct":57.5,"place_pct":0.0,"descriptive_pct":25.0,"ship_pct":3.75,"association_pct":5.0,"myth_pct":0.0,"nature_pct":2.5,"institution_pct":0.0,"word_pct":0.0,"other_pct":6.25,"year_median":1952,"women":0}},"n_nations":26,"not_known":401,"us_uk_pct":45.83,"claims":[{"claim":"Norway","name":"Dronning Maud Land","n":2271,"own_pct":55.75,"top":[{"nation":"Norway","n":1266,"pct":55.75},{"nation":"Japan","n":335,"pct":14.75},{"nation":"Russia","n":280,"pct":12.33},{"nation":"Germany","n":180,"pct":7.93}]},{"claim":"Australia","name":"Australian Antarctic Territory","n":3645,"own_pct":37.89,"top":[{"nation":"Australia","n":1381,"pct":37.89},{"nation":"Russia","n":723,"pct":19.84},{"nation":"United States","n":658,"pct":18.05},{"nation":"Norway","n":248,"pct":6.8}]},{"claim":"France","name":"Adélie Land","n":234,"own_pct":87.18,"top":[{"nation":"France","n":204,"pct":87.18},{"nation":"United States","n":26,"pct":11.11},{"nation":"Australia","n":4,"pct":1.71}]},{"claim":"New Zealand","name":"Ross Dependency","n":3972,"own_pct":28.93,"top":[{"nation":"United States","n":1908,"pct":48.04},{"nation":"New Zealand","n":1149,"pct":28.93},{"nation":"United Kingdom","n":521,"pct":13.12},{"nation":"Germany","n":162,"pct":4.08}]},{"claim":"Chile","name":"Chilean Antarctic Territory","n":7853,"own_pct":4.94,"top":[{"nation":"United Kingdom","n":2860,"pct":36.42},{"nation":"Bulgaria","n":1522,"pct":19.38},{"nation":"United States","n":1225,"pct":15.6},{"nation":"Argentina","n":399,"pct":5.08}]},{"claim":"United Kingdom","name":"British Antarctic Territory","n":8105,"own_pct":40.99,"top":[{"nation":"United Kingdom","n":3322,"pct":40.99},{"nation":"Bulgaria","n":1393,"pct":17.19},{"nation":"United States","n":965,"pct":11.91},{"nation":"Argentina","n":441,"pct":5.44}]},{"claim":"Argentina","name":"Argentine Antarctica","n":7947,"own_pct":5.52,"top":[{"nation":"United Kingdom","n":3243,"pct":40.81},{"nation":"Bulgaria","n":1393,"pct":17.53},{"nation":"United States","n":915,"pct":11.51},{"nation":"Argentina","n":439,"pct":5.52}]},{"claim":"Unclaimed","name":"Marie Byrd Land (unclaimed)","n":1140,"own_pct":null,"top":[{"nation":"United States","n":1091,"pct":95.7},{"nation":"New Zealand","n":16,"pct":1.4},{"nation":"Russia","n":16,"pct":1.4},{"nation":"United Kingdom","n":14,"pct":1.23}]}],"claim_n":{"Norway":{"claim":"Norway","name":"Dronning Maud Land","n":2271,"own_pct":55.75,"top":[{"nation":"Norway","n":1266,"pct":55.75},{"nation":"Japan","n":335,"pct":14.75},{"nation":"Russia","n":280,"pct":12.33},{"nation":"Germany","n":180,"pct":7.93}]},"Australia":{"claim":"Australia","name":"Australian Antarctic Territory","n":3645,"own_pct":37.89,"top":[{"nation":"Australia","n":1381,"pct":37.89},{"nation":"Russia","n":723,"pct":19.84},{"nation":"United States","n":658,"pct":18.05},{"nation":"Norway","n":248,"pct":6.8}]},"France":{"claim":"France","name":"Adélie Land","n":234,"own_pct":87.18,"top":[{"nation":"France","n":204,"pct":87.18},{"nation":"United States","n":26,"pct":11.11},{"nation":"Australia","n":4,"pct":1.71}]},"New Zealand":{"claim":"New Zealand","name":"Ross Dependency","n":3972,"own_pct":28.93,"top":[{"nation":"United States","n":1908,"pct":48.04},{"nation":"New Zealand","n":1149,"pct":28.93},{"nation":"United Kingdom","n":521,"pct":13.12},{"nation":"Germany","n":162,"pct":4.08}]},"Chile":{"claim":"Chile","name":"Chilean Antarctic Territory","n":7853,"own_pct":4.94,"top":[{"nation":"United Kingdom","n":2860,"pct":36.42},{"nation":"Bulgaria","n":1522,"pct":19.38},{"nation":"United States","n":1225,"pct":15.6},{"nation":"Argentina","n":399,"pct":5.08}]},"United Kingdom":{"claim":"United Kingdom","name":"British Antarctic Territory","n":8105,"own_pct":40.99,"top":[{"nation":"United Kingdom","n":3322,"pct":40.99},{"nation":"Bulgaria","n":1393,"pct":17.19},{"nation":"United States","n":965,"pct":11.91},{"nation":"Argentina","n":441,"pct":5.44}]},"Argentina":{"claim":"Argentina","name":"Argentine Antarctica","n":7947,"own_pct":5.52,"top":[{"nation":"United Kingdom","n":3243,"pct":40.81},{"nation":"Bulgaria","n":1393,"pct":17.53},{"nation":"United States","n":915,"pct":11.51},{"nation":"Argentina","n":439,"pct":5.52}]},"Unclaimed":{"claim":"Unclaimed","name":"Marie Byrd Land (unclaimed)","n":1140,"own_pct":null,"top":[{"nation":"United States","n":1091,"pct":95.7},{"nation":"New Zealand","n":16,"pct":1.4},{"nation":"Russia","n":16,"pct":1.4},{"nation":"United Kingdom","n":14,"pct":1.23}]}},"eras":[{"label":"Before 1897","from":1700,"to":1896,"n":92,"pct":0.54,"top":[{"nation":"United Kingdom","n":69},{"nation":"France","n":10},{"nation":"United States","n":5}]},{"label":"Heroic age, 1897 to 1922","from":1897,"to":1922,"n":148,"pct":0.86,"top":[{"nation":"United Kingdom","n":89},{"nation":"France","n":18},{"nation":"New Zealand","n":10}]},{"label":"1923 to 1945","from":1923,"to":1945,"n":94,"pct":0.55,"top":[{"nation":"United Kingdom","n":65},{"nation":"United States","n":15},{"nation":"Australia","n":7}]},{"label":"1946 to 1956","from":1946,"to":1956,"n":2743,"pct":15.95,"top":[{"nation":"United Kingdom","n":1228},{"nation":"United States","n":574},{"nation":"France","n":313}]},{"label":"IGY, 1957 to 1959","from":1957,"to":1959,"n":991,"pct":5.76,"top":[{"nation":"United Kingdom","n":478},{"nation":"New Zealand","n":175},{"nation":"Australia","n":141}]},{"label":"1960 to 1979","from":1960,"to":1979,"n":7472,"pct":43.46,"top":[{"nation":"United States","n":3371},{"nation":"United Kingdom","n":1285},{"nation":"Norway","n":676}]},{"label":"1980 to 1999","from":1980,"to":1999,"n":2549,"pct":14.82,"top":[{"nation":"United States","n":499},{"nation":"Poland","n":327},{"nation":"United Kingdom","n":297}]},{"label":"2000 onwards","from":2000,"to":2030,"n":3105,"pct":18.06,"top":[{"nation":"Bulgaria","n":1491},{"nation":"United States","n":596},{"nation":"United Kingdom","n":396}]}],"decades":{"1780":1,"1820":33,"1830":6,"1840":42,"1870":2,"1890":14,"1900":59,"1910":81,"1920":19,"1930":62,"1940":830,"1950":2919,"1960":5384,"1970":2088,"1980":1336,"1990":1213,"2000":1419,"2010":1488,"2020":198},"peak_decade":1960,"peak_decade_n":5384,"dec_nation":{"United States":{"1820":2,"1840":2,"1890":1,"1900":3,"1910":2,"1920":7,"1930":4,"1940":229,"1950":392,"1960":2567,"1970":804,"1980":163,"1990":336,"2000":552,"2010":43,"2020":1},"United Kingdom":{"1780":1,"1820":30,"1830":3,"1840":31,"1870":1,"1890":4,"1900":33,"1910":53,"1920":9,"1930":49,"1940":331,"1950":1384,"1960":830,"1970":455,"1980":163,"1990":134,"2000":138,"2010":195,"2020":63},"Norway":{"1890":3,"1910":6,"1920":2,"1930":2,"1940":44,"1950":172,"1960":581,"1970":95,"1980":11,"1990":2,"2000":32,"2010":78},"Bulgaria":{"1980":2,"1990":41,"2000":447,"2010":954,"2020":90},"Australia":{"1840":1,"1910":8,"1920":1,"1930":6,"1940":114,"1950":203,"1960":441,"1970":205,"1980":188,"1990":74,"2000":20,"2010":76,"2020":32},"New Zealand":{"1840":1,"1890":1,"1900":3,"1910":7,"1940":1,"1950":192,"1960":610,"1970":61,"1980":98,"1990":174,"2000":65,"2010":31,"2020":4},"Russia":{"1820":1,"1940":3,"1950":6,"1960":72,"1970":178,"1980":14,"1990":34,"2010":7},"France":{"1830":3,"1840":7,"1900":16,"1910":2,"1940":32,"1950":330,"1960":34,"1970":53,"1980":1,"1990":3,"2000":2,"2010":18},"Germany":{"1870":1,"1940":13,"1950":84,"1960":35,"1970":58,"1980":229,"1990":30,"2000":5,"2010":5,"2020":1},"Argentina":{"1940":5,"1950":8,"1960":5,"1970":11,"1980":6,"1990":3,"2000":5,"2010":5}},"since2000":3105,"since2000_pct":18.06,"before1900":98,"bulg_since2000_pct":48.02,"year_median":1967,"bulgaria":{"n":1534,"place_n":852,"place_pct":56.95,"since2000_pct":97.2},"people":{"n":1772,"located":1449,"cont":{"Europe":{"n":1072,"pct":73.98},"North America":{"n":253,"pct":17.46},"Oceania":{"n":66,"pct":4.55},"South America":{"n":18,"pct":1.24},"Asia":{"n":33,"pct":2.28},"Africa":{"n":7,"pct":0.48}},"top":[{"country":"United Kingdom","n":307,"pct":21.19},{"country":"United States","n":239,"pct":16.49},{"country":"France","n":166,"pct":11.46},{"country":"Norway","n":132,"pct":9.11},{"country":"Bulgaria","n":84,"pct":5.8},{"country":"Germany","n":80,"pct":5.52},{"country":"Russia","n":50,"pct":3.45},{"country":"New Zealand","n":45,"pct":3.11},{"country":"Belgium","n":36,"pct":2.48},{"country":"Sweden","n":28,"pct":1.93},{"country":"Italy","n":25,"pct":1.73},{"country":"Australia","n":21,"pct":1.45}],"n_countries":61,"europe_pct":73.98,"south_n":25,"asia_n":33,"africa_n":7,"sam_n":18,"oce_n":66,"born_median":1876,"top_people":[{"name":"Roald Amundsen","n":8,"country":"Norway"},{"name":"Ernest Shackleton","n":7,"country":"Ireland"},{"name":"Douglas Mawson","n":7,"country":"United Kingdom"},{"name":"Carsten Borchgrevink","n":6,"country":""},{"name":"Adrien de Gerlache","n":6,"country":"Belgium"},{"name":"Charles Swithinbank","n":6,"country":"Myanmar"},{"name":"Carl Anton Larsen","n":5,"country":"Norway"},{"name":"Robert Falcon Scott","n":5,"country":"United Kingdom"},{"name":"Frank Wild","n":5,"country":"United Kingdom"},{"name":"Alfred Wegener","n":5,"country":"Germany"},{"name":"Gordon de Quetteville Robin","n":5,"country":"Australia"},{"name":"Mikhail Lazarev","n":4,"country":"Russia"}]},"home":[{"nation":"United States","n":292,"home_pct":57.88,"top_other":["United Kingdom","Norway","Australia"]},{"nation":"United Kingdom","n":662,"home_pct":40.18,"top_other":["France","United States","Germany"]},{"nation":"Australia","n":51,"home_pct":33.33,"top_other":["United Kingdom","Norway","Russia"]},{"nation":"New Zealand","n":90,"home_pct":33.33,"top_other":["United Kingdom","United States","Norway"]},{"nation":"Norway","n":126,"home_pct":80.95,"top_other":["Sweden","United Kingdom","Myanmar"]},{"nation":"France","n":120,"home_pct":73.33,"top_other":["United Kingdom","Argentina","United States"]},{"nation":"Russia","n":37,"home_pct":81.08,"top_other":["Estonia","Ukraine","Norway"]},{"nation":"Bulgaria","n":144,"home_pct":59.03,"top_other":["North Macedonia","France","Turkey"]}],"home_n":{"United States":{"nation":"United States","n":292,"home_pct":57.88,"top_other":["United Kingdom","Norway","Australia"]},"United Kingdom":{"nation":"United Kingdom","n":662,"home_pct":40.18,"top_other":["France","United States","Germany"]},"Australia":{"nation":"Australia","n":51,"home_pct":33.33,"top_other":["United Kingdom","Norway","Russia"]},"New Zealand":{"nation":"New Zealand","n":90,"home_pct":33.33,"top_other":["United Kingdom","United States","Norway"]},"Norway":{"nation":"Norway","n":126,"home_pct":80.95,"top_other":["Sweden","United Kingdom","Myanmar"]},"France":{"nation":"France","n":120,"home_pct":73.33,"top_other":["United Kingdom","Argentina","United States"]},"Russia":{"nation":"Russia","n":37,"home_pct":81.08,"top_other":["Estonia","Ukraine","Norway"]},"Bulgaria":{"nation":"Bulgaria","n":144,"home_pct":59.03,"top_other":["North Macedonia","France","Turkey"]}},"women":{"n":315,"pct_person":3.37,"by_era":[{"label":"Before 1897","n":1,"persons":58,"pct":1.72},{"label":"Heroic age, 1897 to 1922","n":2,"persons":70,"pct":2.86},{"label":"1923 to 1945","n":1,"persons":26,"pct":3.85},{"label":"1946 to 1956","n":71,"persons":1554,"pct":4.57},{"label":"IGY, 1957 to 1959","n":8,"persons":445,"pct":1.8},{"label":"1960 to 1979","n":45,"persons":4636,"pct":0.97},{"label":"1980 to 1999","n":52,"persons":922,"pct":5.64},{"label":"2000 onwards","n":116,"persons":1103,"pct":10.52}],"since1990":159,"since1990_pct":10.32,"before1990_pct":1.88,"nation":{"United States":121,"United Kingdom":74,"Bulgaria":29,"Norway":22,"New Zealand":15,"Not known":12},"relatives_royals":106,"relatives_royals_pct":33.65,"pre1990_rel_pct":63.5,"post1990_rel_pct":6.29,"big":["Queen Maud Land","Victoria Land","Marie Byrd Land","Princess Elizabeth Land","Queen Mary Land","Adelaide Island","Ronne Ice Shelf","Ingrid Christensen Coast","Princess Astrid Coast","Princess Ragnhild Coast","Queen Mary Coast","Adélie Coast"]},"surnames":[{"surname":"Smith","person":35,"carry":28},{"surname":"Davis","person":23,"carry":21},{"surname":"Brown","person":22,"carry":14},{"surname":"Johnson","person":21,"carry":15},{"surname":"Wilson","person":19,"carry":19},{"surname":"Miller","person":19,"carry":17},{"surname":"Williams","person":18,"carry":19},{"surname":"Wright","person":18,"carry":16},{"surname":"Scott","person":18,"carry":16},{"surname":"Martin","person":17,"carry":19},{"surname":"Jones","person":17,"carry":18},{"surname":"Lewis","person":17,"carry":17},{"surname":"Evans","person":17,"carry":16},{"surname":"Taylor","person":16,"carry":17},{"surname":"Larsen","person":16,"carry":14},{"surname":"King","person":15,"carry":18},{"surname":"Anderson","person":15,"carry":14},{"surname":"Thomas","person":13,"carry":16},{"surname":"Walker","person":13,"carry":13},{"surname":"Bennett","person":13,"carry":11}],"pkeys":[{"key":"r scott","n":11},{"key":"h arctowski","n":9},{"key":"soviet","n":9},{"key":"w bruce","n":8},{"key":"c larsen","n":8},{"key":"j davis","n":8},{"key":"r brown","n":7},{"key":"e evans","n":7},{"key":"m lazarev","n":7},{"key":"c wright","n":7},{"key":"r amundsen","n":6},{"key":"r smith","n":6},{"key":"j charcot","n":6},{"key":"c swithinbank","n":6},{"key":"f nansen","n":6},{"key":"c mackellar","n":6},{"key":"r johnson","n":6},{"key":"p law","n":6},{"key":"j marr","n":6},{"key":"d mawson","n":6}],"roles":{"All":{"n":9353,"royal":{"n":497,"pct":5.31},"patron":{"n":606,"pct":6.48},"science":{"n":3119,"pct":33.35},"military":{"n":1707,"pct":18.25},"support":{"n":799,"pct":8.54},"explorer":{"n":733,"pct":7.84},"arts":{"n":183,"pct":1.96},"other":{"n":1709,"pct":18.27}},"United States":{"n":4126,"royal":{"n":101,"pct":2.45},"patron":{"n":226,"pct":5.48},"science":{"n":1582,"pct":38.34},"military":{"n":1254,"pct":30.39},"support":{"n":297,"pct":7.2},"explorer":{"n":175,"pct":4.24},"arts":{"n":6,"pct":0.15},"other":{"n":485,"pct":11.75}},"United Kingdom":{"n":1928,"royal":{"n":100,"pct":5.19},"patron":{"n":140,"pct":7.26},"science":{"n":670,"pct":34.75},"military":{"n":194,"pct":10.06},"support":{"n":139,"pct":7.21},"explorer":{"n":155,"pct":8.04},"arts":{"n":86,"pct":4.46},"other":{"n":444,"pct":23.03}},"Australia":{"n":892,"royal":{"n":84,"pct":9.42},"patron":{"n":76,"pct":8.52},"science":{"n":231,"pct":25.9},"military":{"n":74,"pct":8.3},"support":{"n":220,"pct":24.66},"explorer":{"n":74,"pct":8.3},"arts":{"n":1,"pct":0.11},"other":{"n":132,"pct":14.8}},"New Zealand":{"n":428,"royal":{"n":24,"pct":5.61},"patron":{"n":18,"pct":4.21},"science":{"n":162,"pct":37.85},"military":{"n":42,"pct":9.81},"support":{"n":39,"pct":9.11},"explorer":{"n":77,"pct":17.99},"arts":{"n":3,"pct":0.7},"other":{"n":63,"pct":14.72}},"Norway":{"n":342,"royal":{"n":27,"pct":7.89},"patron":{"n":26,"pct":7.6},"science":{"n":78,"pct":22.81},"military":{"n":31,"pct":9.06},"support":{"n":42,"pct":12.28},"explorer":{"n":53,"pct":15.5},"arts":{"n":2,"pct":0.58},"other":{"n":83,"pct":24.27}},"Bulgaria":{"n":388,"royal":{"n":70,"pct":18.04},"patron":{"n":17,"pct":4.38},"science":{"n":65,"pct":16.75},"military":{"n":13,"pct":3.35},"support":{"n":7,"pct":1.8},"explorer":{"n":47,"pct":12.11},"arts":{"n":51,"pct":13.14},"other":{"n":118,"pct":30.41}},"Russia":{"n":141,"royal":{"n":3,"pct":2.13},"patron":{"n":1,"pct":0.71},"science":{"n":62,"pct":43.97},"military":{"n":13,"pct":9.22},"support":{"n":3,"pct":2.13},"explorer":{"n":18,"pct":12.77},"arts":{"n":13,"pct":9.22},"other":{"n":28,"pct":19.86}},"France":{"n":257,"royal":{"n":32,"pct":12.45},"patron":{"n":24,"pct":9.34},"science":{"n":65,"pct":25.29},"military":{"n":29,"pct":11.28},"support":{"n":15,"pct":5.84},"explorer":{"n":30,"pct":11.67},"arts":{"n":3,"pct":1.17},"other":{"n":59,"pct":22.96}}},"role_names":{"royal":"Royalty, heads of state and politicians","patron":"Patrons, sponsors and officials","science":"Scientists and surveyors","military":"Naval and military personnel","support":"Support staff: cooks, radio operators, mechanics","explorer":"Explorers, whalers and sealers","arts":"Writers, artists and composers","other":"Others or unclear"},"us_support_military_pct":37.59,"different":{"n":1038,"pct":8.69,"by_gaz":{"Argentina":661,"Chile":574,"Russia":352,"Norway":168,"Germany":49,"United Kingdom":619,"United States":776},"examples":[{"name":"Canto Point","names":"Canto Point (United States) | Spark Point (United Kingdom) | Figueroa, Punta (Chile) | Spark, punta (Argentina)","nn":4},{"name":"Goetschy Island","names":"Goetschy Island (United States) | Priest Island (United Kingdom) | Priest, Islote (Chile) | Grillete, islote (Argentina)","nn":4},{"name":"Seal Nunataks","names":"Seal Nunataks (United States) | Seal Nunataks (United Kingdom) | Robbeninseln (Germany) | Seal, Nunataks (Chile) | Foca, nunataks (Argentina) | Seal Nunataks (Russia)","nn":3},{"name":"Admiralty Bay","names":"Admiralty Bay (United States) | Admiralty Bay (United Kingdom) | Almirantazgo, Bahía (Chile) | Lasserre, bahía (Argentina) | Admiralty Bay (Russia)","nn":3},{"name":"Ambush Bay","names":"Ambush Bay (United States) | Ambush Bay (United Kingdom) | Alessandri, Bahía (Chile) | Carminatti, bahía (Argentina) | Ambush Bay (Russia)","nn":3},{"name":"Azure Cove","names":"Azure Cove (United States) | Azure Cove (United Kingdom) | Azur, Baie (Belgium) | Riquelme, Bahía (Chile) | Azure, bahía (Argentina) | Zapiola, bahía (Argentina)","nn":3},{"name":"Batterbee Mountains","names":"Batterbee Mountains (United States) | Batterbee Mountains (United Kingdom) | Parodi, Montes (Chile) | Avión Cruz del Sur, montes (Argentina) | Batterbee Mountains (Russia)","nn":3},{"name":"Black Point","names":"Black Point (United States) | Black Point (United Kingdom) | Negra, Punta (Chile) | Negra, punta (Argentina) | Black Point (Russia)","nn":3},{"name":"Danger Islands","names":"Danger Islands (United States) | Danger Islands (United Kingdom) | Peligro, Islotes (Chile) | Peligro, islotes (Argentina) | Danger Islands (Russia)","nn":3},{"name":"Davey Point","names":"Davey Point (United States) | Davey Point (United Kingdom) | Galindo, Punta (Chile) | Agnese, punta (Argentina) | Davey, punta (Argentina) | Davey Point (Russia)","nn":3}]},"checks":{"women_read":368,"women_yes":315,"women_no":53,"kind_fixes":214,"bp_unmapped":21,"merged":8,"audit_n":60,"audit_decidable":58,"audit_first_faults":7,"audit_first_ok_pct":93.1,"review_kind":196,"review_women":106,"links_removed":5,"uk_century_fixed":226},"kind_names":{"person":"A person","group":"People as a group","ship":"A ship","vehicle":"An aircraft, vehicle or spacecraft","institution":"An institution, expedition or operation","place":"A place elsewhere","event":"An event or date","myth":"Myth and fiction","word":"Stars, letters, words and works","nature":"Wildlife and plants","descriptive":"Its shape, colour or story (descriptive)","association":"A nearby feature (association)","other":"Other or unclear","unknown":"Not stated"},"kind_cols":{"person":"#C8322B","group":"#E07A6C","ship":"#2F5FA7","vehicle":"#5BA3C9","institution":"#E0A11B","place":"#2E9A8C","event":"#B4532A","myth":"#7B57A8","word":"#9C7BC0","nature":"#55803A","descriptive":"#8C8478","association":"#BBB3A6","other":"#D8D0C2","unknown":"#ECE5D6"},"ncol":{"United States":"#2F5FA7","United Kingdom":"#C8322B","Russia":"#7B57A8","New Zealand":"#1F2F4D","Australia":"#E0A11B","Argentina":"#5BA3C9","Chile":"#B4532A","Norway":"#2E9A8C","Bulgaria":"#55803A","Germany":"#3A3A3A","Poland":"#D9677F","China":"#E05A2B","Japan":"#C2185B","France":"#4C6FBF","Belgium":"#C8A21E","Sweden":"#7FA7D9","Italy":"#6E9E4A","Undersea (SCUFN)":"#8FA9B8","Other":"#9C9284","Not known":"#C9C0B0"}};
+const fmt = n => n == null || n === "" ? "n/a" : Math.round(n).toLocaleString("en-GB");
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const $ = id => document.getElementById(id);
+const tip = $("tip");
+function showTip(h, x, y) { tip.innerHTML = h; tip.style.display = "block"; const w = tip.offsetWidth; x = Math.max(w / 2 + 8, Math.min(innerWidth - w / 2 - 8, x)); tip.style.left = x + scrollX + "px"; tip.style.top = y + scrollY + "px"; }
+function hideTip() { tip.style.display = "none"; }
+document.addEventListener("click", e => { if (!e.target.closest("svg")) hideTip(); });
+const NS = "http://www.w3.org/2000/svg";
+const el = (t, a, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+const lbl = (svg, x, y, s, cls = "lab", anchor = "start") => { const t = el("text", { x, y, class: cls, "text-anchor": anchor }, svg); t.textContent = s; return t; };
+const hov = (n, h) => { n.addEventListener("mousemove", ev => showTip(h, ev.clientX, ev.clientY)); n.addEventListener("mouseleave", hideTip); n.addEventListener("click", ev => { ev.stopPropagation(); showTip(h, ev.clientX, ev.clientY); }); };
+function resp(box, render) { let last = 0; const go = force => { const w = Math.max(280, Math.round(box.clientWidth)); if (!force && Math.abs(w - last) < 4) return; last = w; box.innerHTML = ""; render(w, w < 560); }; new ResizeObserver(() => go()).observe(box); go(); }
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const NCOL = R.ncol, KN = R.kind_names, KC = R.kind_cols;
+const ncol = n => NCOL[n] || NCOL.Other;
+const short = n => n.replace("United States", "US").replace("United Kingdom", "UK").replace("New Zealand", "NZ");
+
+/* hero mark: the continent as a white disc with a peninsula, a flag pin, a name label */
+(function () {
+  const g = $("heroMark");
+  el("circle", { cx: 60, cy: 60, r: 52, fill: "#DCE6EA", stroke: "currentColor", "stroke-width": 2 }, g);
+  el("path", { d: "M30 58 q4 -22 26 -24 q18 -2 28 10 q12 12 6 28 q-6 18 -28 18 q-16 0 -24 -10 q-4 -6 -14 -2 q-10 4 -18 -6 q-4 -6 -2 -10 q8 2 14 -2 q6 -4 12 -2z", fill: "#FFFFFF", stroke: "currentColor", "stroke-width": 1.8 }, g);
+  el("line", { x1: 62, y1: 58, x2: 62, y2: 30, stroke: "#2B2119", "stroke-width": 2 }, g);
+  el("path", { d: "M62 30 l18 5 l-18 5z", fill: "#A3261B" }, g);
+  el("circle", { cx: 62, cy: 58, r: 3, fill: "#A3261B" }, g);
+})();
+
+/* ---------- charts ---------- */
+function stack100(box, rows, keys, cols, names, title, lw0) {
+  resp(box, (w, sm) => {
+    const lw = sm ? 70 : (lw0 || 120), rh = 26, h = rows.length * (rh + 8) + 6, svg = el("svg", { viewBox: `0 0 ${w} ${h}`, role: "img", "aria-label": title }, box);
+    rows.forEach((r, k) => { const y = 4 + k * (rh + 8); let x = lw; const tot = keys.reduce((a, q) => a + (r.v[q] || 0), 0);
+      lbl(svg, lw - 8, y + rh / 2 + 4, sm ? short(r.label) : r.label, "lab b", "end");
+      keys.forEach((q, j) => { const v = r.v[q] || 0; if (!v) return; const ww = (w - lw - 2) * v / tot;
+        const b = el("rect", { x, y, width: Math.max(.5, ww - 1), height: rh, fill: cols[j] }, svg);
+        if (ww > 36) lbl(svg, x + 5, y + rh / 2 + 4, Math.round(100 * v / tot) + "%", "lab s w");
+        hov(b, `<b>${esc(r.label)}: ${esc(names[j])}</b><br>${fmt(v)} of ${fmt(tot)} (${(100 * v / tot).toFixed(1)}%)`); x += ww; }); });
+  });
+}
+function natChart() {
+  resp($("natChart"), (w, sm) => {
+    const rows = R.nations.slice(0, 15), rh = 22, lw = sm ? 92 : 128, h = rows.length * rh + 8, mx = rows[0].n;
+    const svg = el("svg", { viewBox: `0 0 ${w} ${h}`, role: "img", "aria-label": "Bar chart of features named by each nation" }, $("natChart"));
+    rows.forEach((r, i) => { const y = 4 + i * rh, ww = (w - lw - 70) * r.n / mx;
+      lbl(svg, lw - 6, y + 14, sm ? short(r.nation) : r.nation, "lab s", "end");
+      const b = el("rect", { x: lw, y: y + 3, width: Math.max(1, ww), height: rh - 7, fill: ncol(r.nation), rx: 2 }, svg);
+      lbl(svg, lw + ww + 5, y + 14, fmt(r.n) + " (" + Math.round(r.pct) + "%)", "lab s b");
+      hov(b, `<b>${esc(r.nation)}</b><br>${fmt(r.n)} features, ${r.pct.toFixed(1)}%<br>median year named: ${r.year_median ?? "n/a"}`); });
+  });
+}
+function claimChart() {
+  const order = ["United States", "United Kingdom", "Australia", "Norway", "New Zealand", "Russia", "Argentina", "Chile", "France", "Japan", "Bulgaria", "Other"];
+  const rows = R.claims.map(c => { const v = {}; let s = 0; c.top.forEach(t => { const k = order.includes(t.nation) ? t.nation : "Other"; v[k] = (v[k] || 0) + t.n; s += t.n; }); v.Other = (v.Other || 0) + (c.n - s); return { label: c.claim === "Unclaimed" ? "Marie Byrd Land" : c.name.replace("Antarctic Territory", "Ant. Terr."), v }; });
+  stack100($("claimChart"), rows, order, order.map(ncol), order, "Stacked bars: who named the features in each claim", 190);
+}
+function decChart() {
+  resp($("decChart"), (w, sm) => {
+    const D = [1820, 1830, 1840, 1850, 1860, 1870, 1880, 1890, 1900, 1910, 1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
+    const top = Object.keys(R.dec_nation).slice(0, 8), h = sm ? 230 : 280, lw = 44, bw = (w - lw - 6) / D.length;
+    const svg = el("svg", { viewBox: `0 0 ${w} ${h + 24}`, role: "img", "aria-label": "Stacked columns of features named per decade" }, $("decChart"));
+    const mx = Math.max(...D.map(d => R.decades[d] || 0));
+    [0, 2000, 4000].forEach(t => { const y = h - (h - 10) * t / mx; el("line", { x1: lw, x2: w, y1: y, y2: y, stroke: css("--rule") }, svg); lbl(svg, lw - 6, y + 4, fmt(t), "lab s m", "end"); });
+    D.forEach((d, i) => { let y = h; const x = lw + i * bw + 1; let rest = R.decades[d] || 0;
+      top.forEach(n => { const v = (R.dec_nation[n][d] || 0); if (!v) return; rest -= v; const hh = (h - 10) * v / mx; y -= hh;
+        hov(el("rect", { x, y, width: Math.max(1, bw - 2), height: hh, fill: ncol(n) }, svg), `<b>${d}s: ${esc(n)}</b><br>${fmt(v)} features`); });
+      if (rest > 0) { const hh = (h - 10) * rest / mx; y -= hh; hov(el("rect", { x, y, width: Math.max(1, bw - 2), height: hh, fill: NCOL.Other }, svg), `<b>${d}s: other nations</b><br>${fmt(rest)} features`); }
+      if (d % 20 === 0 || d === 1820) lbl(svg, x + bw / 2, h + 16, String(d), "lab s m", "middle"); });
+    let lx = lw + 6; top.concat(["Other"]).forEach(n => { if (lx > w - 60) return; el("rect", { x: lx, y: 4, width: 10, height: 10, fill: ncol(n) }, svg); lbl(svg, lx + 14, 13, short(n), "lab s"); lx += short(n).length * 7.2 + 26; });
+  });
+}
+function kindChart() {
+  const keys = ["person", "ship", "institution", "place", "myth", "word", "nature", "descriptive", "association", "other"];
+  const rows = R.nations.slice(0, 14).map(n => { const v = Object.fromEntries(keys.map(k => [k, Math.round((n[k + "_pct"] || 0) * n.stated / 100)])); v.rest = Math.max(0, n.stated - keys.reduce((a, k) => a + v[k], 0)); return { label: n.nation, v }; });
+  const ks = keys.concat(["rest"]), names = ks.map(k => k === "rest" ? "Groups, vehicles and events" : KN[k]), cols = ks.map(k => k === "rest" ? "#E8B4A8" : KC[k]);
+  stack100($("kindChart"), rows, ks, cols, names, "Stacked bars: what each nation's features are named after");
+  $("kindLegend").innerHTML = ks.map((k, i) => `<span><i style="background:${cols[i]}"></i>${esc(names[i])}</span>`).join("");
+}
+function roleChart() {
+  const ks = Object.keys(R.role_names), cols = ["#7B57A8", "#E0A11B", "#2E9A8C", "#2F5FA7", "#C8322B", "#B4532A", "#9C7BC0", "#D8D0C2"];
+  const rows = ["All", "United States", "United Kingdom", "Australia", "New Zealand", "Norway", "Russia", "France", "Bulgaria"].map(n => ({ label: n === "All" ? "All nations" : n, v: Object.fromEntries(ks.map(k => [k, R.roles[n][k].n])) }));
+  stack100($("roleChart"), rows, ks, cols, ks.map(k => R.role_names[k]), "Stacked bars: what the honoured people did");
+  $("roleLegend").innerHTML = ks.map((k, i) => `<span><i style="background:${cols[i]}"></i>${esc(R.role_names[k])}</span>`).join("");
+}
+function contChart() {
+  const C = ["Europe", "North America", "Oceania", "South America", "Asia", "Africa"], cols = ["#2F5FA7", "#C8322B", "#E0A11B", "#2E9A8C", "#7B57A8", "#B4532A"];
+  stack100($("contChart"), [{ label: "Birthplaces", v: Object.fromEntries(C.map(c => [c, R.people.cont[c].n])) }], C, cols, C, "Stacked bar: continents of birth");
+  const lg = document.createElement("div"); lg.className = "legend"; lg.innerHTML = C.map((c, i) => `<span><i style="background:${cols[i]}"></i>${c}</span>`).join(""); $("contChart").after(lg);
+}
+function womenChart() {
+  resp($("womenChart"), (w, sm) => {
+    const rows = R.women.by_era.filter(e => e.persons >= 20), rh = 26, lw = sm ? 150 : 190, h = rows.length * rh + 8, mx = Math.max(...rows.map(r => r.pct));
+    const svg = el("svg", { viewBox: `0 0 ${w} ${h}`, role: "img", "aria-label": "Bar chart of the share of women among honoured people by period" }, $("womenChart"));
+    rows.forEach((r, i) => { const y = 4 + i * rh, ww = (w - lw - 60) * r.pct / mx;
+      lbl(svg, lw - 6, y + 15, r.label.replace(", 1897 to 1922", "").replace("IGY, ", "IGY "), "lab s", "end");
+      const b = el("rect", { x: lw, y: y + 4, width: Math.max(1, ww), height: rh - 9, fill: "#C8322B", rx: 2 }, svg);
+      lbl(svg, lw + ww + 5, y + 15, r.pct.toFixed(1) + "%", "lab s b");
+      hov(b, `<b>${esc(r.label)}</b><br>${r.n} women of ${fmt(r.persons)} people honoured`); });
+  });
+}
+function diffTable() {
+  const t = $("diffTable");
+  t.innerHTML = "<tr><th>Feature</th><th>Names in the national lists</th></tr>" + R.different.examples.map((d, i) => `<tr data-k="${esc(d.name)}"><td>${esc(d.name)}</td><td>${esc(d.names).replace(/ \| /g, "<br>")}</td></tr>`).join("");
+  t.querySelectorAll("tr[data-k]").forEach(tr => tr.addEventListener("click", () => { const f = F.find(f => f.name === tr.dataset.k); if (f) { pick(f.i, true); $("atlas").scrollIntoView({ behavior: "smooth" }); } }));
+}
+[natChart, claimChart, decChart, kindChart, roleChart, contChart, womenChart].forEach(f => f());
+
+/* ---------- maps ---------- */
+let F = [], PP = [], S = { nat: null, col: "nation", sel: null, psel: null }, amap, wmap, aReady = false, wReady = false;
+const ERAC = [[1700, 1896, "#3A3A3A"], [1897, 1922, "#7B57A8"], [1923, 1956, "#2F5FA7"], [1957, 1959, "#C8322B"], [1960, 1979, "#E0A11B"], [1980, 1999, "#2E9A8C"], [2000, 2030, "#55803A"]];
+const ERAN = ["Before 1897", "Heroic age, 1897 to 1922", "1923 to 1956", "IGY, 1957 to 1959", "1960 to 1979", "1980 to 1999", "2000 onwards"];
+let SITE;
+function colOf(f) {
+  if (S.col === "kind") return SITE.kinds[f.k][2];
+  if (S.col === "era") { if (f.year == null) return "#C9C0B0"; const e = ERAC.find(e => f.year >= e[0] && f.year <= e[1]); return e ? e[2] : "#C9C0B0"; }
+  return SITE.nations[f.n][1];
+}
+function legend() {
+  let h = "";
+  if (S.col === "nation") h = SITE.nations.slice(0, 15).map(([n, c]) => `<span><i style="background:${c}"></i>${esc(n)}</span>`).join("") + `<span><i style="background:${NCOL.Other}"></i>Other</span><span><i style="background:${NCOL["Not known"]}"></i>Not known</span>`;
+  else if (S.col === "kind") h = SITE.kinds.map(([k, n, c]) => `<span><i style="background:${c}"></i>${esc(n)}</span>`).join("");
+  else h = ERAC.map((e, i) => `<span><i style="background:${e[2]}"></i>${ERAN[i]}</span>`).join("") + `<span><i style="background:#C9C0B0"></i>No date</span>`;
+  $("legend").innerHTML = h;
+}
+function lyrControl(map, items, onChange) {
+  const C = L.Control.extend({ options: { position: "topleft" }, onAdd() {
+    const d = L.DomUtil.create("div", "lyrCtl"); L.DomEvent.disableClickPropagation(d); L.DomEvent.disableScrollPropagation(d);
+    d.innerHTML = `<button class="lyrBtn" aria-expanded="false">Layers</button><div class="lyrPanel" hidden>${items.map(g => `<h5>${g[0]}</h5>` + g[1].map(([k, n, on]) => `<label><input type="checkbox" data-k="${k}" ${on ? "checked" : ""}>${n}</label>`).join("")).join("")}</div>`;
+    const b = d.querySelector(".lyrBtn"), p = d.querySelector(".lyrPanel");
+    b.onclick = () => { const o = p.hidden; p.hidden = !o; b.setAttribute("aria-expanded", String(o)); };
+    p.querySelectorAll("input").forEach(i => i.onchange = () => onChange(i.dataset.k, i.checked));
+    return d; } });
+  map.addControl(new C());
+}
+const toLL = (x, y) => L.latLng(y, x);
+async function initMaps() {
+  SITE = await (await fetch("data/site.json")).json();
+  const fc = SITE.fcols, pc = SITE.pcols;
+  F = SITE.features.map((a, i) => { const o = {}; fc.forEach((c, j) => o[c] = a[j]); return { i, fid: o.fid, name: o.name, x: o.x, y: o.y, n: o.nation, k: o.kind, year: o.year, gaz: o.gaz, hon: o.honoree, p: o.person, type: o.type, woman: o.woman, names: o.names, lat: o.lat, lon: o.lon }; });
+  PP = SITE.people.map((a, i) => { const o = {}; pc.forEach((c, j) => o[c] = a[j]); o.i = i; return o; });
+  const byFid = new Map(F.map(f => [f.fid, f]));
+  PP.forEach(p => p.fs = p.features.map(id => byFid.get(id)).filter(Boolean));
+  const [land, shelves, claims, grat] = await Promise.all(["base_land", "base_shelves", "base_claims", "base_grat"].map(async n => (await fetch(`data/${n}.geojson`)).json()));
+  // polar map: CRS.Simple in km (x east, y north)
+  amap = L.map("amap", { crs: L.CRS.Simple, minZoom: -4, maxZoom: 5, zoomSnap: 0.25, attributionControl: true, preferCanvas: true });
+  const sw = L.latLng(-3600, -3600), ne = L.latLng(3600, 3600);
+  const home = () => { const el = $("amap"), z = Math.log2(Math.min(el.clientWidth / 5900, el.clientHeight / 5300)); amap.setView([-100, 0], Math.floor(z * 4) / 4); }; home(); setTimeout(() => { amap.invalidateSize(); home(); }, 300); amap.setMaxBounds(L.latLngBounds(sw, ne).pad(0.2));
+  amap.attributionControl.setPrefix(false).addAttribution('<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap</a> via OpenFreeMap · Natural Earth · SCAR CGA');
+  const coords = c => L.GeoJSON.coordsToLatLng([c[0], c[1]]);
+  const geo = (g, st) => L.geoJSON(g, { coordsToLatLng: coords, style: st, interactive: false });
+  const L_grat = geo(grat, { color: "#7C93A3", weight: .6, opacity: .55, dashArray: "3 4" }).addTo(amap);
+  const L_shelf = geo(shelves, { stroke: false, color: "#8FA9B8", weight: 0, fillColor: "#EEF3F6", fillOpacity: 1 }).addTo(amap);
+  const L_land = geo(land, { color: "#5E7486", weight: .9, fillColor: "#FFFFFF", fillOpacity: 1 }).addTo(amap);
+  const L_claims = L.geoJSON(claims, { coordsToLatLng: coords, interactive: false, style: f => ({ color: f.properties.nation === "Unclaimed" ? "#9C9284" : ncol(f.properties.nation), weight: 1.6, opacity: .8, fill: true, fillOpacity: .05, dashArray: "6 4" }) });
+  const L_clab = L.layerGroup(); claims.features.forEach(f => { const p = f.properties, a = (p.w + p.e) / 2 * Math.PI / 180, r = 2900; L.marker(L.latLng(r * Math.cos(a), r * Math.sin(a)), { interactive: false, icon: L.divIcon({ className: "plab claim", html: esc(p.name), iconSize: null }) }).addTo(L_clab); });
+  const renderer = L.canvas({ padding: 0.3 });
+  const L_feat = L.layerGroup().addTo(amap), L_sel = L.layerGroup().addTo(amap);
+  const marks = F.map(f => { const m = L.circleMarker(toLL(f.x, f.y), { renderer, radius: 2.6, weight: .4, color: "#2B2119", fillColor: colOf(f), fillOpacity: .9 }); m.on("click", () => pick(f.i, false)); m._f = f; return m; });
+  const BIGN = new Set(["Queen Maud Land", "Enderby Land", "Wilkes Land", "Victoria Land", "Marie Byrd Land", "Ellsworth Land", "Palmer Land", "Graham Land", "Ross Ice Shelf", "Ronne Ice Shelf", "Filchner Ice Shelf", "Amery Ice Shelf", "Ross Sea", "Weddell Sea", "Bellingshausen Sea", "Amundsen Sea", "Coats Land", "Mac. Robertson Land", "Princess Elizabeth Land", "Oates Land", "George V Land", "Queen Mary Land"]);
+  const KEY = new Set(["Queen Maud Land", "Wilkes Land", "Victoria Land", "Marie Byrd Land", "Ross Ice Shelf", "Ronne Ice Shelf", "Weddell Sea", "Enderby Land"]);   // no "Ross Sea": it collides with Victoria Land at this zoom
+  const L_lab = L.layerGroup().addTo(amap), L_lab2 = L.layerGroup(), L_stat = L.layerGroup(), L_small0 = L.layerGroup();
+  const seen = new Set();
+  F.forEach(f => { if (BIGN.has(f.name) && !seen.has(f.name)) { seen.add(f.name); L.marker(toLL(f.x, f.y), { interactive: false, icon: L.divIcon({ className: "plab big", html: esc(f.name), iconSize: null }) }).addTo(KEY.has(f.name) ? L_lab : L_lab2); }
+    else if (["Coast", "Ice shelf", "Plateau"].includes(f.type) && !BIGN.has(f.name)) L.marker(toLL(f.x, f.y), { interactive: false, icon: L.divIcon({ className: "plab", html: esc(f.name), iconSize: null }) }).addTo(L_small0); });
+  const L_small = L_small0;
+  const L_stations = L.layerGroup(); F.filter(f => f.type === "Station").forEach(f => L.circleMarker(toLL(f.x, f.y), { radius: 5, color: "#2B2119", weight: 1.4, fillColor: "#FFFFFF", fillOpacity: 1 }).bindTooltip(esc(f.name)).on("click", () => pick(f.i, false)).addTo(L_stations));
+  function redraw() {
+    L_feat.clearLayers(); let n = 0;
+    marks.forEach(m => { const f = m._f; if (S.nat != null && f.n !== S.nat) return; m.setStyle({ fillColor: colOf(f) }); L_feat.addLayer(m); n++; });
+    $("acount").textContent = fmt(n) + " features"; legend();
+  }
+  let labsOn = true;
+  const labZoom = () => { if (labsOn && amap.getZoom() >= -2) L_lab2.addTo(amap); else amap.removeLayer(L_lab2); };
+  amap.on("zoomend", labZoom);
+  amap.on("zoomend", () => { const r = amap.getZoom() > 1 ? 4.2 : amap.getZoom() > -1 ? 3.2 : 2.4; marks.forEach(m => m.setRadius(r)); });
+  lyrControl(amap, [["Base map", [["shelf", "Ice shelves", true], ["grat", "Graticule", true]]], ["Overlays", [["claims", "National claims", false], ["labs", "Region names", true], ["small", "Coasts and plateaus", false], ["stations", "Stations", false]]], ["Data", [["feat", "Named features", true]]]],
+    (k, on) => { if (k === "labs") { labsOn = on; labZoom(); } const L_ = { shelf: L_shelf, grat: L_grat, claims: [L_claims, L_clab], labs: L_lab, small: L_small, stations: L_stations, feat: L_feat }[k]; [].concat(L_).forEach(l => on ? l.addTo(amap) : amap.removeLayer(l)); });
+  window.__layers = { claims: L_claims, stations: L_stations };
+  // world map of birthplaces (equirectangular, lon/lat)
+  wmap = L.map("wmap", { crs: L.CRS.EPSG4326, minZoom: 0, maxZoom: 8, worldCopyJump: false, attributionControl: true, preferCanvas: true }).setView([42, 5], 1);
+  wmap.attributionControl.setPrefix(false).addAttribution("Natural Earth · Wikidata (CC0)");
+  const world = await (await fetch("data/world.geojson")).json();
+  const W_land = L.geoJSON(world, { interactive: false, style: { color: "#9C8656", weight: .6, fillColor: "#ECD9AC", fillOpacity: 1 } }).addTo(wmap);
+  const W_pts = L.layerGroup().addTo(wmap), W_sel = L.layerGroup().addTo(wmap);
+  const byPlace = new Map(); PP.forEach(p => { if (p.lat == null) return; const k = p.lat.toFixed(1) + "," + p.lon.toFixed(1); if (!byPlace.has(k)) byPlace.set(k, []); byPlace.get(k).push(p); });
+  window.PLACES = [...byPlace.values()];
+  PLACES.forEach((ps, j) => { const n = ps.reduce((a, p) => a + p.fs.length, 0); L.circleMarker([ps[0].lat, ps[0].lon], { radius: 2.5 + Math.sqrt(n) * 1.8, color: "#2B2119", weight: .6, fillColor: "#C8322B", fillOpacity: .7 }).on("click", () => pickPlace(j, false)).addTo(W_pts); });
+  $("wcount").textContent = fmt(PLACES.length) + " birthplaces";
+  lyrControl(wmap, [["Base map", [["wland", "Land", true]]], ["Data", [["wpts", "Birthplaces", true]]]], (k, on) => { const L_ = { wland: W_land, wpts: W_pts }[k]; on ? L_.addTo(wmap) : wmap.removeLayer(L_); });
+  window.pick = function (i, fly) {
+    const f = F[i]; S.sel = i; L_sel.clearLayers();
+    L.circleMarker(toLL(f.x, f.y), { radius: 9, color: "#A3261B", weight: 2.5, fill: false }).addTo(L_sel);
+    if (fly) amap.flyTo(toLL(f.x, f.y), Math.max(amap.getZoom(), 2), { duration: .8 });
+    const nat = SITE.nations[f.n][0], kd = SITE.kinds[f.k][1], gz = f.gaz.map(g => SITE.gaz[g]).join(", ");
+    const p = f.p >= 0 ? PP[f.p] : null;
+    const h = `<b class="t">${esc(f.name)}</b><span class="k">${esc(f.type || "Feature")} · ${f.lat.toFixed(2)}, ${f.lon.toFixed(2)}</span><br>Named by: <b>${esc(nat)}</b>${f.year ? ", " + f.year : ""}<br>Named after: ${esc(kd)}${f.woman ? " (a woman)" : ""}${f.hon ? `<br><span class="k">“${esc(f.hon)}${f.hon.length >= 180 ? "…" : ""}”</span>` : ""}<br><span class="k">In the gazetteers of: ${esc(gz)}</span>${f.names ? `<br><span class="k">Names: ${esc(f.names)}</span>` : ""}${p ? `<br>Wikidata: <a href="https://www.wikidata.org/wiki/${p.pid}" target="_blank" rel="noopener">${esc(p.name)}</a>${p.lat != null ? `, born ${p.born ?? ""} near ${esc(p.near)}${p.country ? ", " + esc(p.country) : ""} <span class="go" data-p="${p.i}">show</span>` : ""}` : ""}<br><span class="k">Source: SCAR CGA; reading by rule, see method</span>`;
+    const openA = () => { L.popup({ maxWidth: 310, autoPanPadding: [20, 20] }).setLatLng(toLL(f.x, f.y)).setContent(h).openOn(amap); setTimeout(() => document.querySelectorAll("#amap .go[data-p]").forEach(g => g.onclick = () => pickPerson(+g.dataset.p)), 30); };
+    if (fly) setTimeout(openA, 900); else openA();
+    $("info").innerHTML = `<b>${esc(f.name)}</b>: named by ${esc(nat)}${f.year ? " in " + f.year : ""}, after ${esc(kd.toLowerCase())}.` + (p && p.lat != null ? ` ${esc(p.name)} was born near ${esc(p.near)}${p.country ? ", " + esc(p.country) : ""}.` : "");
+    W_sel.clearLayers();
+    if (p && p.lat != null) { L.circleMarker([p.lat, p.lon], { radius: 11, color: "#A3261B", weight: 3, fill: false }).addTo(W_sel); wmap.flyTo([p.lat, p.lon], Math.max(wmap.getZoom(), 3), { duration: .8 }); S.psel = p.i; }
+  };
+  window.pickPerson = function (pi) { const p = PP[pi]; const j = PLACES.findIndex(ps => ps.includes(p)); if (j >= 0) pickPlace(j, true); };
+  window.pickPlace = function (j, fly) {
+    const ps = PLACES[j], p0 = ps[0]; W_sel.clearLayers(); L.circleMarker([p0.lat, p0.lon], { radius: 11, color: "#A3261B", weight: 3, fill: false }).addTo(W_sel);
+    if (fly) wmap.flyTo([p0.lat, p0.lon], Math.max(wmap.getZoom(), 4), { duration: .8 });
+    const items = ps.flatMap(p => p.fs.map(f => `<li><span class="go" data-f="${f.i}">${esc(f.name)}</span> <span class="k">for ${esc(p.name)}${p.born ? " (b. " + p.born + ")" : ""}</span></li>`)).join("");
+    const openW = () => { L.popup({ maxWidth: 300, autoPanPadding: [20, 20] }).setLatLng([p0.lat, p0.lon]).setContent(`<b class="t">Near ${esc(p0.near)}</b><span class="k">${esc(p0.country)} · nearest large town, ${p0.near_km} km</span><ul style="margin:6px 0 0;padding-left:16px">${items}</ul><span class="k">Birthplaces: Wikidata</span>`).openOn(wmap);
+      setTimeout(() => document.querySelectorAll("#wmap .go[data-f]").forEach(g => g.onclick = () => pick(+g.dataset.f, true)), 30); };
+    if (fly) setTimeout(openW, 900); else openW();
+    S.psel = p0.i;
+  };
+  // nation picker and colour buttons
+  const row = $("natRow");
+  const allB = document.createElement("button"); allB.className = "btn"; allB.textContent = "All nations"; allB.setAttribute("aria-pressed", "true"); allB.onclick = () => setNat(null); row.appendChild(allB);
+  SITE.nations.slice(0, 15).forEach(([n, c], j) => { const b = document.createElement("button"); b.className = "btn"; b.dataset.n = j; b.innerHTML = `<i style="background:${c}"></i>${esc(n)}`; b.setAttribute("aria-pressed", "false"); b.onclick = () => setNat(j); row.appendChild(b); });
+  window.setNat = function (j) { S.nat = j; row.querySelectorAll(".btn").forEach(b => b.setAttribute("aria-pressed", String(j == null ? !b.dataset.n : b.dataset.n == j))); $("atitle").textContent = j == null ? "Antarctica: every named feature" : "Named by " + SITE.nations[j][0]; redraw(); };
+  $("colRow").querySelectorAll(".btn").forEach(b => b.onclick = () => { S.col = b.dataset.c; $("colRow").querySelectorAll(".btn").forEach(x => x.setAttribute("aria-pressed", String(x === b))); redraw(); });
+  // search: features and people
+  const q = $("q"), sug = $("sug"); let hits = [], ai = -1;
+  const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  const IDX = F.map(f => [norm(f.name), "f", f.i]).concat(PP.map(p => [norm(p.name), "p", p.i]));
+  q.oninput = () => { const s = norm(q.value.trim()); if (s.length < 2) { sug.style.display = "none"; return; }
+    hits = IDX.filter(x => x[0].includes(s)).sort((a, b) => (a[0].startsWith(s) ? 0 : 1) - (b[0].startsWith(s) ? 0 : 1)).slice(0, 12); ai = 0;
+    sug.innerHTML = hits.map((h, k) => `<li role="option" aria-selected="${k === 0}" data-k="${k}">${h[1] === "f" ? esc(F[h[2]].name) + ` <span>${esc(SITE.nations[F[h[2]].n][0])}</span>` : esc(PP[h[2]].name) + ` <span>person, ${PP[h[2]].fs.length} feature(s)</span>`}</li>`).join("");
+    sug.style.display = hits.length ? "block" : "none"; sug.querySelectorAll("li").forEach(li => li.onclick = () => choose(+li.dataset.k)); };
+  q.onkeydown = e => { if (e.key === "Enter" && hits.length) { choose(Math.max(0, ai)); e.preventDefault(); } else if (e.key === "ArrowDown" || e.key === "ArrowUp") { ai = (ai + (e.key === "ArrowDown" ? 1 : hits.length - 1)) % hits.length; sug.querySelectorAll("li").forEach((li, k) => li.setAttribute("aria-selected", String(k === ai))); e.preventDefault(); } else if (e.key === "Escape") sug.style.display = "none"; };
+  function choose(k) { const h = hits[k]; sug.style.display = "none"; if (!h) return; if (h[1] === "f") pick(h[2], true); else { const p = PP[h[2]]; if (p.fs[0]) pick(p.fs[0].i, true); } }
+  redraw(); diffTable(); aReady = wReady = true;
+}
+initMaps();
+/* theme */
+$("theme").onclick = () => { const r = document.documentElement, d = r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; r.dataset.theme = d ? "light" : "dark"; };
+</script>
+<!-- map-fullscreen v1 -->
+<style id="mfs-style">
+.mfs-btn{position:absolute;top:10px;right:10px;z-index:1001;width:34px;height:34px;border:2px solid rgba(0,0,0,.25);border-radius:4px;background:#fff;color:#222;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.mfs-btn:hover{background:#f2f2f2}
+.mfs-btn svg{width:18px;height:18px}
+.mfs-host.mfs-btn-left .mfs-btn{right:auto;left:54px}
+.mfs-fake{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;height:100dvh!important;max-width:none!important;max-height:none!important;margin:0!important;z-index:100000!important;border-radius:0!important}
+html.mfs-lock,html.mfs-lock body{overflow:hidden!important}
+:fullscreen.mfs-host{width:100vw!important;height:100vh!important;max-width:none!important;max-height:none!important;margin:0!important;border-radius:0!important}
+</style>
+<script id="mfs-script">
+(function(){
+  var ICON_OPEN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>';
+  var ICON_CLOSE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>';
+  function poke(){setTimeout(function(){window.dispatchEvent(new Event('resize'));},60);setTimeout(function(){window.dispatchEvent(new Event('resize'));},400);}
+  function realFS(){return document.fullscreenElement||document.webkitFullscreenElement;}
+  function add(el){
+    if(el.__mfs)return; el.__mfs=1;
+    var cs=getComputedStyle(el); if(cs.position==='static')el.style.position='relative';
+    el.classList.add('mfs-host');
+    // avoid clashing with a top-right Leaflet control (e.g. "Map layers")
+    var tr=el.querySelector('.leaflet-top.leaflet-right');
+    if(tr&&tr.children.length){ el.classList.add('mfs-btn-left'); }
+    var b=document.createElement('button'); b.type='button'; b.className='mfs-btn';
+    b.title='Full screen map'; b.setAttribute('aria-label','Full screen map'); b.innerHTML=ICON_OPEN;
+    ['click','dblclick','mousedown','touchstart','wheel'].forEach(function(t){b.addEventListener(t,function(e){e.stopPropagation();},{passive:t!=='click'});});
+    function setIcon(on){b.innerHTML=on?ICON_CLOSE:ICON_OPEN;b.title=on?'Exit full screen':'Full screen map';b.setAttribute('aria-label',b.title);}
+    function exitFake(){el.classList.remove('mfs-fake');document.documentElement.classList.remove('mfs-lock');setIcon(false);poke();}
+    b.addEventListener('click',function(e){
+      e.preventDefault();
+      if(el.classList.contains('mfs-fake')){exitFake();return;}
+      if(realFS()){(document.exitFullscreen||document.webkitExitFullscreen).call(document);return;}
+      var req=el.requestFullscreen||el.webkitRequestFullscreen;
+      if(req){ try{ var p=req.call(el); if(p&&p.catch)p.catch(function(){el.classList.add('mfs-fake');document.documentElement.classList.add('mfs-lock');setIcon(true);poke();}); }catch(err){el.classList.add('mfs-fake');document.documentElement.classList.add('mfs-lock');setIcon(true);poke();} }
+      else { el.classList.add('mfs-fake');document.documentElement.classList.add('mfs-lock');setIcon(true);poke(); }
+    });
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&el.classList.contains('mfs-fake'))exitFake();});
+    ['fullscreenchange','webkitfullscreenchange'].forEach(function(t){document.addEventListener(t,function(){setIcon(realFS()===el);poke();});});
+    el.appendChild(b);
+  }
+  function scan(){
+    var els=document.querySelectorAll('[data-fullscreen-map], .leaflet-container, .maplibregl-map, .mapboxgl-map');
+    els.forEach(function(el){
+      if(el.closest('.mfs-host')&&!el.classList.contains('mfs-host'))return;
+      var r=el.getBoundingClientRect(); if(r.width<200||r.height<150)return;
+      add(el);
+    });
+  }
+  function start(){scan(); var n=0; var t=setInterval(function(){scan(); if(++n>20)clearInterval(t);},500);}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start); else start();
+})();
+</script>
+<!-- /map-fullscreen -->
+
+<script src="https://maps.tristanhotham.com/assets/site-nav.js" defer></script>
+</body>
+</html>
